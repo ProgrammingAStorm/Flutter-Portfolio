@@ -18,19 +18,19 @@ class FolderButton extends StatefulWidget {
     "button": <String, dynamic>{
       "picked": <bool, ButtonStyle>{
         true: TextButton.styleFrom(
-            backgroundColor: Colors.blueGrey,
+            backgroundColor: Colors.blueGrey.shade400,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(5), topRight: Radius.circular(5)),
                 side: BorderSide(
                     color: Colors.blueGrey, strokeAlign: StrokeAlign.outside))),
         false: TextButton.styleFrom(
-            backgroundColor: Colors.blueGrey.shade400,
+            backgroundColor: Colors.blueGrey,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(5), topRight: Radius.circular(5)),
                 side: BorderSide(
-                    color: Colors.blueGrey, strokeAlign: StrokeAlign.outside)))
+                    color: Colors.blueGrey, strokeAlign: StrokeAlign.outside))),
       }
     },
     "padding": <bool, dynamic>{
