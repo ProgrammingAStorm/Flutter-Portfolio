@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/components/folder_button.dart';
 
+// TODO Add some animation here too
+// TODO Add real pages
 class Folder extends StatefulWidget {
   const Folder({super.key});
 
