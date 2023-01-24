@@ -13,7 +13,6 @@ class FolderButton extends StatefulWidget {
   final bool selected;
   final Function setTab;
 
-  // TODO Fix button styles to look more congruent
   static final theme = <String, dynamic>{
     "button": <String, dynamic>{
       "picked": <bool, ButtonStyle>{

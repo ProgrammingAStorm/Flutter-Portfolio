@@ -68,7 +68,10 @@ class _FolderState extends State<Folder> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.blueGrey.shade300),
+      decoration: BoxDecoration(
+          color: Colors.blueGrey.shade300,
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(color: Colors.blueGrey)),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
