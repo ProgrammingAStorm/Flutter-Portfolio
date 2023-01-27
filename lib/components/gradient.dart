@@ -73,7 +73,6 @@ class _GradientWidState extends State<GradientWid>
       onHover: _updateLocation,
       child: DecoratedBoxTransition(
         decoration: _getTween().animate(_animationController),
-        // TODO Make this a part of the folder widget
         child: Center(child: widget.child),
       ),
     );

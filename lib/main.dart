@@ -16,17 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         // TODO Set up theme with light and dark color palettes
-        theme: ThemeData(primarySwatch: Colors.blue),
-        home: const MainMenu()
-        // IMPORTANT
-        // This scaffold marks the beginning
-        //   appBar: AppBar(
-        //     title: const Text('Portfolio'),
-        //   ),
-        //   body: Column(
-        //     children: [],
-        //   ),
-        // ),
-        );
+        theme: ThemeData(),
+        home: const MainMenu());
   }
 }

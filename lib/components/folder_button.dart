@@ -18,20 +18,21 @@ class FolderButton extends StatefulWidget {
     "button": <String, dynamic>{
       "picked": <bool, ButtonStyle>{
         true: TextButton.styleFrom(
-            backgroundColor: Colors.blueGrey,
-            shape: RoundedRectangleBorder(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(5), topRight: Radius.circular(5)),
-                side: BorderSide(
-                    color: Colors.blueGrey.shade600,
-                    strokeAlign: StrokeAlign.outside))),
-        false: TextButton.styleFrom(
-            backgroundColor: Colors.blueGrey,
+            backgroundColor: Colors.deepPurple,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(5), topRight: Radius.circular(5)),
                 side: BorderSide(
-                    color: Colors.blueGrey, strokeAlign: StrokeAlign.outside))),
+                    color: Colors.deepPurpleAccent,
+                    strokeAlign: StrokeAlign.outside))),
+        false: TextButton.styleFrom(
+            backgroundColor: Colors.deepPurple,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5), topRight: Radius.circular(5)),
+                side: BorderSide(
+                    color: Colors.deepPurple,
+                    strokeAlign: StrokeAlign.outside))),
       }
     },
     // TODO Make it so I don't need to do it like this
@@ -43,9 +44,9 @@ class FolderButton extends StatefulWidget {
 
   static Color? getTabShading(selected) {
     if (selected) {
-      return Colors.blueGrey.shade400;
+      return Colors.deepPurpleAccent;
     }
-    return Colors.blueGrey;
+    return Colors.deepPurple;
   }
 
   static EdgeInsetsGeometry getTabPadding(selected) {
@@ -84,7 +85,8 @@ class _FolderButtonState extends State<FolderButton> {
             child: Text(
                 // Text of the button
                 widget.title,
-                style: TextStyle(color: Colors.blueGrey.shade900) // Text Style,
+                style: TextStyle(
+                    color: Colors.deepPurpleAccent.shade100) // Text Style,
                 )),
       ),
     );

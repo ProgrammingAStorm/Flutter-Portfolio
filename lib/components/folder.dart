@@ -2,48 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/components/folder_button.dart';
 
 // TODO Add some animation here too
-// TODO Add real pages
 class Folder extends StatefulWidget {
   const Folder({super.key});
 
+  // TODO Add button to move to handbook here instead of floating button
   static Map<String, Widget> staticPages = {
     "Welcome": Column(
-      children: const [
+      children: [
         Text(
           'Welcome',
-          //style: TextStyle(backgroundColor: Colors.white)
+          style: TextStyle(color: Colors.deepPurpleAccent.shade100),
         )
       ],
     ),
     "Web Dev's Handbook": Column(
-      children: const [
+      children: [
         Text(
           "Web Dev's Handbook",
-          //style: TextStyle(backgroundColor: Colors.white)
+          style: TextStyle(color: Colors.deepPurpleAccent.shade100),
         )
       ],
     ),
     "Interactive Resume": Column(
-      children: const [
+      children: [
         Text(
           'Interactive Resume',
-          //style: TextStyle(backgroundColor: Colors.white)
+          style: TextStyle(color: Colors.deepPurpleAccent.shade100),
         )
       ],
     ),
     "Settings": Column(
-      children: const [
+      children: [
         Text(
           'Settings',
-          //style: TextStyle(backgroundColor: Colors.white)
+          style: TextStyle(color: Colors.deepPurpleAccent.shade100),
         )
       ],
     ),
     "Credits": Column(
-      children: const [
+      children: [
         Text(
           'Credits',
-          //style: TextStyle(backgroundColor: Colors.white)
+          style: TextStyle(color: Colors.deepPurpleAccent.shade100),
         )
       ],
     ),
@@ -79,8 +79,6 @@ class Folder extends StatefulWidget {
     return newTabs;
   }
 
-  static clearSelected() {}
-
   @override
   State<Folder> createState() => _FolderState();
 }
@@ -97,7 +95,7 @@ class _FolderState extends State<Folder> {
   @override
   Widget build(BuildContext context) {
     // TODO make sure the inner contents of the folder fill out properly
-    return Container(
+    return SizedBox(
       width: 750,
       height: 750,
       child: Padding(
@@ -118,13 +116,13 @@ class _FolderState extends State<Folder> {
               fit: FlexFit.tight,
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.blueGrey.shade400,
+                    color: Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.circular(5)),
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Container(
                       width: 800,
-                      decoration: const BoxDecoration(color: Colors.blueGrey),
+                      decoration: const BoxDecoration(color: Colors.deepPurple),
                       child: Folder.staticPages[Folder.staticTabs[_selectedTab]
                           ["title"]]),
                 ),
