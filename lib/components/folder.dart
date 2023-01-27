@@ -7,18 +7,42 @@ class Folder extends StatefulWidget {
   const Folder({super.key});
 
   static Map<String, Widget> staticPages = {
-    "Settings": Column(
+    "Welcome": Column(
       children: const [
         Text(
-          'Ipsum',
+          'Welcome',
           //style: TextStyle(backgroundColor: Colors.white)
         )
       ],
     ),
-    "Test": Column(
+    "Web Dev's Handbook": Column(
       children: const [
         Text(
-          'Test',
+          "Web Dev's Handbook",
+          //style: TextStyle(backgroundColor: Colors.white)
+        )
+      ],
+    ),
+    "Interactive Resume": Column(
+      children: const [
+        Text(
+          'Interactive Resume',
+          //style: TextStyle(backgroundColor: Colors.white)
+        )
+      ],
+    ),
+    "Settings": Column(
+      children: const [
+        Text(
+          'Settings',
+          //style: TextStyle(backgroundColor: Colors.white)
+        )
+      ],
+    ),
+    "Credits": Column(
+      children: const [
+        Text(
+          'Credits',
           //style: TextStyle(backgroundColor: Colors.white)
         )
       ],
@@ -26,8 +50,11 @@ class Folder extends StatefulWidget {
   };
 
   static List<Map<String, dynamic>> staticTabs = [
+    {"title": "Welcome"},
+    {"title": "Web Dev's Handbook"},
+    {"title": "Interactive Resume"},
     {"title": "Settings"},
-    {"title": "Test"},
+    {"title": "Credits"},
   ];
 
   static List<FolderButton> generateTabs(int selectedTab, Function setTab) {
