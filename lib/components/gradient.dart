@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../components//folder.dart';
 
 // TODO Change colors to match theme
 // TODO Find a way to add some mouse interactivity
@@ -75,16 +74,7 @@ class _GradientWidState extends State<GradientWid>
       child: DecoratedBoxTransition(
         decoration: _getTween().animate(_animationController),
         // TODO Make this a part of the folder widget
-        child: Center(
-            child: Container(
-                width: 600,
-                height: 600,
-                decoration: BoxDecoration(
-                    color: Colors.blueGrey.shade200,
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: Colors.blueGrey)),
-                child: const Padding(
-                    padding: EdgeInsets.all(15), child: Folder()))),
+        child: Center(child: widget.child),
       ),
     );
   }

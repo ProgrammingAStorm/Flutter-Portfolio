@@ -5,6 +5,8 @@ void main() {
   runApp(const MyApp());
 }
 
+// TODO In general make sure to go back and clean up and refactor code as need once the main page is done
+// TODO Make sure everything is well commented
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

@@ -69,11 +69,10 @@ class _FolderState extends State<Folder> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO make sure the inner contents of the folder fill out properly
     return Container(
-      decoration: BoxDecoration(
-          color: Colors.blueGrey.shade300,
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: Colors.blueGrey)),
+      width: 750,
+      height: 750,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(

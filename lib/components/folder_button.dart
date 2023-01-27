@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// TODO Animiate button state changes
 class FolderButton extends StatefulWidget {
   const FolderButton(
       {super.key,
@@ -17,12 +18,13 @@ class FolderButton extends StatefulWidget {
     "button": <String, dynamic>{
       "picked": <bool, ButtonStyle>{
         true: TextButton.styleFrom(
-            backgroundColor: Colors.blueGrey.shade400,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
+            backgroundColor: Colors.blueGrey,
+            shape: RoundedRectangleBorder(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(5), topRight: Radius.circular(5)),
                 side: BorderSide(
-                    color: Colors.blueGrey, strokeAlign: StrokeAlign.outside))),
+                    color: Colors.blueGrey.shade600,
+                    strokeAlign: StrokeAlign.outside))),
         false: TextButton.styleFrom(
             backgroundColor: Colors.blueGrey,
             shape: const RoundedRectangleBorder(
@@ -32,9 +34,10 @@ class FolderButton extends StatefulWidget {
                     color: Colors.blueGrey, strokeAlign: StrokeAlign.outside))),
       }
     },
+    // TODO Make it so I don't need to do it like this
     "padding": <bool, dynamic>{
       true: const EdgeInsets.only(top: 5, left: 5, right: 5),
-      false: const EdgeInsets.only(top: 0, left: 0, right: 0)
+      false: const EdgeInsets.only(top: 5, left: 5, right: 5)
     }
   };
 
@@ -42,7 +45,7 @@ class FolderButton extends StatefulWidget {
     if (selected) {
       return Colors.blueGrey.shade400;
     }
-    return Colors.blueGrey.shade300;
+    return Colors.blueGrey;
   }
 
   static EdgeInsetsGeometry getTabPadding(selected) {
