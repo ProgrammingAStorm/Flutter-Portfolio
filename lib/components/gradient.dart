@@ -36,6 +36,8 @@ class _GradientWidState extends State<GradientWid>
     setState(() {
       x = details.position.dx;
       y = details.position.dy;
+      print(x);
+      print(y);
     });
   }
 
@@ -43,25 +45,23 @@ class _GradientWidState extends State<GradientWid>
     return DecorationTween(
         begin: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment(1, -1),
-            end: Alignment(-1, -1),
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
             colors: <Color>[
-              Colors.black,
-              Colors.blue,
-              Colors.purple,
-              Colors.red
+              Colors.indigo,
+              Colors.deepPurpleAccent,
+              Colors.pink,
             ],
           ),
         ),
         end: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment(-1, -1),
-            end: Alignment(-2, -1),
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
             colors: <Color>[
-              Colors.red,
-              Colors.purple,
-              Colors.blue,
-              Colors.black
+              Colors.indigo,
+              Colors.deepPurpleAccent,
+              Colors.pink,
             ],
           ),
         ));
