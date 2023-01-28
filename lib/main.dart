@@ -7,6 +7,7 @@ void main() {
 
 // TODO In general make sure to go back and clean up and refactor code as need once the main page is done
 // TODO Make sure everything is well commented
+// TODO Organize files better by usage
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

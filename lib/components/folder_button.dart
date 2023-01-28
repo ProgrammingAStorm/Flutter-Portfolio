@@ -26,13 +26,13 @@ class FolderButton extends StatefulWidget {
                     color: Colors.deepPurpleAccent,
                     strokeAlign: StrokeAlign.outside))),
         false: TextButton.styleFrom(
-            backgroundColor: Colors.deepPurple,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5), topRight: Radius.circular(5)),
-                side: BorderSide(
-                    color: Colors.deepPurple,
-                    strokeAlign: StrokeAlign.outside))),
+          backgroundColor: Colors.deepPurple,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(5), topRight: Radius.circular(5)),
+              side: BorderSide(
+                  color: Colors.deepPurple, strokeAlign: StrokeAlign.outside)),
+        ),
       }
     },
     // TODO Make it so I don't need to do it like this

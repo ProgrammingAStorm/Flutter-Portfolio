@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 // TODO Change colors to match theme
 // TODO Find a way to add some mouse interactivity
 class GradientWid extends StatefulWidget {
-  const GradientWid({super.key, required this.child});
-
-  final Widget child;
+  const GradientWid({
+    super.key,
+  });
 
   @override
   State<GradientWid> createState() => _GradientWidState();
@@ -73,7 +73,7 @@ class _GradientWidState extends State<GradientWid>
       onHover: _updateLocation,
       child: DecoratedBoxTransition(
         decoration: _getTween().animate(_animationController),
-        child: Center(child: widget.child),
+        child: const Center(child: null),
       ),
     );
   }
