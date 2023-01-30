@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 // TODO Add final comments
 class GradientWid extends StatefulWidget {
-  const GradientWid({
-    super.key,
-  });
+  const GradientWid({super.key});
+
+  //final Widget child;
 
   @override
   State<GradientWid> createState() => _GradientWidState();
@@ -124,12 +124,17 @@ class _GradientWidState extends State<GradientWid>
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onHover: _updateLocation,
-      onExit: _clearLocation,
-      child: DecoratedBoxTransition(
-        decoration: _getTween(context, _x, _y, 2).animate(_animationController),
-        child: const Center(child: null),
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      child: MouseRegion(
+        onHover: _updateLocation,
+        onExit: _clearLocation,
+        child: DecoratedBoxTransition(
+          decoration:
+              _getTween(context, _x, _y, 2).animate(_animationController),
+          child: Container(),
+        ),
       ),
     );
   }

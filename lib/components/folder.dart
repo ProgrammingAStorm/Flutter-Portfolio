@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/components/folder_button.dart';
 import 'package:portfolio/pages/contents.dart';
 
-// TODO Add some animation here too
 class Folder extends StatefulWidget {
   const Folder({super.key});
 
-  // TODO Add button to move to handbook here instead of floating button
   static Column? getStaticPages(String page, BuildContext context) {
     Map<String, Column> pages = {
       "Welcome": Column(
@@ -107,14 +105,12 @@ class _FolderState extends State<Folder> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO make sure the inner contents of the folder fill out properly
-    return Container(
-      alignment: Alignment.center,
-      child: SizedBox(
-        width: 750,
-        height: 750,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 1, right: 1, top: 20),
+        child: SizedBox(
+          height: 750,
+          width: 750,
           child: Column(
             children: [
               Flexible(

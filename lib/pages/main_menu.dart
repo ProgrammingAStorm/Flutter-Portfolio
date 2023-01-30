@@ -9,8 +9,9 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO Make logo a child of Appbar,
-      body: Stack(children: const [GradientWid(), Logo(), Folder()]),
+      body: Stack(
+        children: const [GradientWid(), Logo(), Folder()],
+      ),
     );
   }
 }
