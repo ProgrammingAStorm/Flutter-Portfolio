@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'package:portfolio/main.dart';
-
 // TODO Deal with smaller screen sizes
 class Logo extends StatelessWidget {
   const Logo({super.key});
@@ -11,7 +9,7 @@ class Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.topLeft,
-      padding: const EdgeInsets.only(top: 20, left: 20, bottom: 1),
+      padding: const EdgeInsets.only(top: 20, left: 20, bottom: 1, right: 20),
       width: min(500, MediaQuery.of(context).size.width),
       height: 80,
       child: Center(
@@ -21,19 +19,19 @@ class Logo extends StatelessWidget {
             "ProgrammingAStorm",
             style: TextStyle(
                 fontFamily: "BigMisterC",
-                fontSize: 30,
+                fontSize: 35,
                 foreground: Paint()
                   ..style = PaintingStyle.stroke
                   ..strokeWidth = 5
                   ..color = Colors.indigo),
             textScaleFactor:
-                ScaleSize.textScaleFactor(context, maxTextScaleFactor: 2),
+                ScaleSize.textScaleFactor(context, maxTextScaleFactor: 1.6),
           ),
           Text(
             "ProgrammingAStorm",
             style: const TextStyle(
                 fontFamily: "BigMisterC",
-                fontSize: 30,
+                fontSize: 35,
                 fontWeight: FontWeight.w300,
                 color: Colors.deepPurpleAccent,
                 shadows: [
@@ -43,7 +41,7 @@ class Logo extends StatelessWidget {
                       offset: Offset(2.0, 2.0)),
                 ]),
             textScaleFactor:
-                ScaleSize.textScaleFactor(context, maxTextScaleFactor: 2),
+                ScaleSize.textScaleFactor(context, maxTextScaleFactor: 1.6),
           )
         ],
       )),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-// TODO Deal with overflowing buttons
+// TODO Deal with too small text on smaller screen widths
 class FolderButton extends StatefulWidget {
   const FolderButton(
       {super.key,
