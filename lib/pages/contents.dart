@@ -1,8 +1,7 @@
 import "package:flutter/material.dart";
 import "dart:convert";
-//import "package:flutter/services.dart" show rootBundle;
 
-// The overall purpose of this
+// TODO Make text more responsive
 class Contents extends StatelessWidget {
   const Contents({Key? key}) : super(key: key);
 
@@ -32,8 +31,10 @@ class Contents extends StatelessWidget {
     for (var container in contentsData['containers']) {
       widgets.add(Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: createRichText(container),
+        child: Center(
+          child: Column(
+            children: createRichText(container),
+          ),
         ),
       ));
     }

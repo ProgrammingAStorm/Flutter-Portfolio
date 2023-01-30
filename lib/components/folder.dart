@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/components/folder_button.dart';
+import 'package:portfolio/components/settings.dart';
 import 'package:portfolio/components/welcome.dart';
 import 'package:portfolio/pages/contents.dart';
 
@@ -8,7 +9,7 @@ class Folder extends StatefulWidget {
 
   static Widget? getStaticPages(String page, BuildContext context) {
     Map<String, Widget> pages = {
-      "Welcome": Welcome(),
+      "Welcome": const Welcome(),
       "Web Dev's Handbook": Column(
         children: [
           Text(
@@ -33,14 +34,7 @@ class Folder extends StatefulWidget {
           )
         ],
       ),
-      "Settings": Column(
-        children: [
-          Text(
-            'Settings',
-            style: TextStyle(color: Colors.deepPurpleAccent.shade100),
-          )
-        ],
-      ),
+      "Settings": const Settings(),
       "Credits": Column(
         children: [
           Text(
