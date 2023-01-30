@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-// TODO Change colors to match theme
-// TODO Find a way to add some mouse interactivity
+// TODO Add final comments
 class GradientWid extends StatefulWidget {
   const GradientWid({
     super.key,
@@ -48,75 +47,55 @@ class _GradientWidState extends State<GradientWid>
 
   DecorationTween _getTween(
       BuildContext context, double mouseX, double mouseY, double scale) {
-    final double viewWidth = MediaQuery.of(context).size.width;
-    final double viewHeight = MediaQuery.of(context).size.height;
-
-    final double rotationWidth = viewWidth / scale;
-    final double rotationHeight = viewHeight / scale;
-
-    final Map<String, Map<String, double>> rotationPoints = {
-      "a": {
-        "x": mouseX - (rotationWidth / 2),
-        "y": mouseY - (rotationHeight / 2)
-      },
-      "b": {
-        "x": mouseX + (rotationWidth / 2),
-        "y": mouseY - (rotationHeight / 2)
-      },
-      "c": {
-        "x": mouseX + (rotationWidth / 2),
-        "y": mouseY + (rotationHeight / 2)
-      },
-      "d": {
-        "x": mouseX - (rotationWidth / 2),
-        "y": mouseY + (rotationHeight / 2)
-      }
-    };
-
-    Alignment beginBegin = Alignment(
-        (-viewWidth + (2 * rotationPoints["a"]!["x"]!)) / viewWidth,
-        (-viewHeight + (2 * rotationPoints["a"]!["y"]!)) / viewHeight);
-    Alignment beginEnd = Alignment(
-        (-viewWidth + (2 * rotationPoints["c"]!["x"]!)) / viewWidth,
-        (-viewHeight + (2 * rotationPoints["c"]!["y"]!)) / viewHeight);
-    Alignment endBegin = Alignment(
-        (-viewWidth + (2 * rotationPoints["b"]!["x"]!)) / viewWidth,
-        (-viewHeight + (2 * rotationPoints["b"]!["y"]!)) / viewHeight);
-    Alignment endEnd = Alignment(
-        (-viewWidth + (2 * rotationPoints["d"]!["x"]!)) / viewWidth,
-        (-viewHeight + (2 * rotationPoints["d"]!["y"]!)) / viewHeight);
-
-    // print("x $x");
-    // print("y $y");
-
-    // final xPos = x / viewWidth;
-    // final yPos = y / viewHeight;
-
-    // print("xPos $xPos");
-    // print("yPos $yPos");
-
-    // final a = (-viewWidth + (2 * x)) / viewWidth;
-    // final b = (-viewHeight + (2 * y)) / viewHeight;
-
-    // print("a $a");
-    // print("b $b");
-
-    // Alignment beginBegin = Alignment(a + xPos, b - yPos);
-    // Alignment beginEnd = Alignment(-a + xPos, -b - yPos);
-    // Alignment endBegin = Alignment(b - yPos, a + xPos);
-    // Alignment endEnd = Alignment(-b - yPos, -a + xPos);
+    Alignment beginBegin;
+    Alignment beginEnd;
+    Alignment endBegin;
+    Alignment endEnd;
 
     if (mouseX == -0 || mouseY == -0) {
       beginBegin = Alignment.topRight;
       beginEnd = Alignment.bottomLeft;
       endBegin = Alignment.topLeft;
       endEnd = Alignment.bottomRight;
-    }
+    } else {
+      final double viewWidth = MediaQuery.of(context).size.width;
+      final double viewHeight = MediaQuery.of(context).size.height;
 
-    // const Alignment beginBegin = Alignment.topRight;
-    // const Alignment beginEnd = Alignment.bottomLeft;
-    // const Alignment endBegin = Alignment.topLeft;
-    // const Alignment endEnd = Alignment.bottomRight;
+      final double rotationWidth = viewWidth / scale;
+      final double rotationHeight = viewHeight / scale;
+
+      final Map<String, Map<String, double>> rotationPoints = {
+        "a": {
+          "x": mouseX - (rotationWidth / 2),
+          "y": mouseY - (rotationHeight / 2)
+        },
+        "b": {
+          "x": mouseX + (rotationWidth / 2),
+          "y": mouseY - (rotationHeight / 2)
+        },
+        "c": {
+          "x": mouseX + (rotationWidth / 2),
+          "y": mouseY + (rotationHeight / 2)
+        },
+        "d": {
+          "x": mouseX - (rotationWidth / 2),
+          "y": mouseY + (rotationHeight / 2)
+        }
+      };
+
+      beginBegin = Alignment(
+          (-viewWidth + (2 * rotationPoints["a"]!["x"]!)) / viewWidth,
+          (-viewHeight + (2 * rotationPoints["a"]!["y"]!)) / viewHeight);
+      beginEnd = Alignment(
+          (-viewWidth + (2 * rotationPoints["c"]!["x"]!)) / viewWidth,
+          (-viewHeight + (2 * rotationPoints["c"]!["y"]!)) / viewHeight);
+      endBegin = Alignment(
+          (-viewWidth + (2 * rotationPoints["b"]!["x"]!)) / viewWidth,
+          (-viewHeight + (2 * rotationPoints["b"]!["y"]!)) / viewHeight);
+      endEnd = Alignment(
+          (-viewWidth + (2 * rotationPoints["d"]!["x"]!)) / viewWidth,
+          (-viewHeight + (2 * rotationPoints["d"]!["y"]!)) / viewHeight);
+    }
 
     return DecorationTween(
         begin: BoxDecoration(
