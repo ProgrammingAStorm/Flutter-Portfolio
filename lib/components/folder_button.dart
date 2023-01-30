@@ -87,13 +87,13 @@ class _FolderButtonState extends State<FolderButton> {
               child: Text(
                   textAlign: TextAlign.center,
                   textScaleFactor: ScaleSize.textScaleFactor(context,
-                      maxTextScaleFactor: 1.5),
+                      maxTextScaleFactor: 1.4),
                   // Text of the button
                   widget.title,
                   style: TextStyle(
                       color: Colors.deepPurpleAccent.shade100,
                       fontSize: 10,
-                      height: 1))),
+                      height: .7))),
         ),
       ),
     );
