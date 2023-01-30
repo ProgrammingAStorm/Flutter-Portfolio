@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 // TODO Animiate button state changes
+// TODO Deal with overflowing buttons
 class FolderButton extends StatefulWidget {
   const FolderButton(
       {super.key,
