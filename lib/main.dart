@@ -9,6 +9,7 @@ void main() {
 // TODO Make sure everything is well commented
 // TODO Organize files better by usage
 // TODO Make sure app is mobile responsive
+// TODO Look into fonts
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

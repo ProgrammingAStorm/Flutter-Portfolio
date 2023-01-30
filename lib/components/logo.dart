@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-// TODO Deal with smaller screen sizes
 class Logo extends StatelessWidget {
   const Logo({super.key});
 

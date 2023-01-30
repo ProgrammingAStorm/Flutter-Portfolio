@@ -23,8 +23,15 @@ class Folder extends StatefulWidget {
                   style: TextStyle(
                       color: Colors.deepPurpleAccent.shade100, fontSize: 20)),
             ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Text(
+                  "If you would like to learn more about the effect, or if you would like to play around with some of its settings, then you can go to the Settings tab for more options. Otherwise, click on the other tabs for more information on those topics and to be navigated to the appropriate page.",
+                  style: TextStyle(
+                      color: Colors.deepPurpleAccent.shade100, fontSize: 20)),
+            ),
             Text(
-                "If you would like to learn more about the effect, or if you would like to play around with some of its settings, then you can go to the Settings tab for more options. Otherwise, click on the other tabs for more information on those topics and to be navigated to the appropriate page.",
+                "Also, be aware that this container is scrollable, so if it apears that something has been cut off at the bottom, try and scroll down.",
                 style: TextStyle(
                     color: Colors.deepPurpleAccent.shade100, fontSize: 20)),
             Padding(
