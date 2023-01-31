@@ -7,7 +7,6 @@ class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.topLeft,
       margin: const EdgeInsets.only(top: 10, bottom: 5, left: 5, right: 5),
       //width: min(500, MediaQuery.of(context).size.width),
       height: 80,

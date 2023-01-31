@@ -94,8 +94,26 @@ class _FolderState extends State<Folder> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(color: Colors.pink),
-      child: Column(children: []),
+      margin: const EdgeInsets.only(left: 20, right: 20),
+      child: Column(children: [
+        Wrap(
+            verticalDirection: VerticalDirection.up,
+            children: Folder.generateTabs(_selectedTab, _setTab)),
+        Container(
+          padding: const EdgeInsets.all(5),
+          decoration: const BoxDecoration(
+              color: Colors.deepPurpleAccent,
+              borderRadius: BorderRadius.all(Radius.circular(5))),
+          child: Container(
+              width: 750,
+              decoration: const BoxDecoration(color: Colors.deepPurple),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Folder.getStaticPages(
+                    Folder.staticTabs[_selectedTab]['title'], context),
+              )),
+        )
+      ]),
     );
   }
 }

@@ -10,7 +10,7 @@ class Settings extends StatelessWidget {
   // TODO Explaind gradient mouse effect with modal
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
         Text(
           'Settings',
