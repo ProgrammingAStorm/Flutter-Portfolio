@@ -10,7 +10,13 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: const [GradientWid(), Logo(), Folder()],
+        children: [
+          const GradientWid(),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [Logo(), Folder()],
+          )
+        ],
       ),
     );
   }
