@@ -6,7 +6,7 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(5),
       child: Column(
         children: [
           Text(

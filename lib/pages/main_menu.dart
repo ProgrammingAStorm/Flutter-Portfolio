@@ -12,9 +12,11 @@ class MainMenu extends StatelessWidget {
       body: Stack(
         children: [
           const GradientWid(),
-          ListView(
-            //mainAxisSize: MainAxisSize.min,
-            children: const [Logo(), Folder()],
+          SingleChildScrollView(
+            child: Column(
+              //mainAxisSize: MainAxisSize.min,
+              children: const [Logo(), Folder()],
+            ),
           )
         ],
       ),
