@@ -91,6 +91,7 @@ class _FolderState extends State<Folder> {
     });
   }
 
+  // TODO Fix vertical wrapping
   @override
   Widget build(BuildContext context) {
     return Container(

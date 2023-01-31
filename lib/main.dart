@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/pages/main_menu.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'components/gradient.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => ResponsiveWrapper.builder(
         BouncingScrollWrapper.builder(context, child!),
         //maxWidth: 1200,
-        minWidth: 450,
+        //minWidth: 450,
         defaultScale: true,
         breakpoints: [
           const ResponsiveBreakpoint.resize(450, name: MOBILE),

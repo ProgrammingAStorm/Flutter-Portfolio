@@ -12,8 +12,8 @@ class MainMenu extends StatelessWidget {
       body: Stack(
         children: [
           const GradientWid(),
-          Column(
-            mainAxisSize: MainAxisSize.min,
+          ListView(
+            //mainAxisSize: MainAxisSize.min,
             children: const [Logo(), Folder()],
           )
         ],
