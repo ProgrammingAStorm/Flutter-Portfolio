@@ -4,10 +4,14 @@ import 'package:portfolio/components/settings.dart';
 import 'package:portfolio/components/welcome.dart';
 import 'package:portfolio/pages/contents.dart';
 
+// TODO Make FolderButton a class in the same file
 class Folder extends StatefulWidget {
-  const Folder({super.key});
+  const Folder({super.key, required this.setScale, required this.setColors});
 
-  static Widget? getStaticPages(String page, BuildContext context) {
+  final setScale;
+  final setColors;
+
+  Widget? getStaticPages(String page, BuildContext context) {
     Map<String, Widget> pages = {
       "Welcome": const Welcome(),
       "Web Dev's Handbook": Column(
@@ -34,7 +38,11 @@ class Folder extends StatefulWidget {
           )
         ],
       ),
-      "Settings": const Settings(),
+      "Projects": const Text("Projects"),
+      "Settings": Settings(
+        setScale: setScale,
+        setColors: setColors,
+      ),
       "Credits": Column(
         children: [
           Text(
@@ -52,6 +60,7 @@ class Folder extends StatefulWidget {
     {"title": "Welcome"},
     {"title": "Web Dev's Handbook"},
     {"title": "Interactive Resume"},
+    {"title": "Projects"},
     {"title": "Settings"},
     {"title": "Credits"},
   ];
@@ -91,7 +100,6 @@ class _FolderState extends State<Folder> {
     });
   }
 
-  // TODO Fix vertical wrapping
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -110,7 +118,7 @@ class _FolderState extends State<Folder> {
               decoration: const BoxDecoration(color: Colors.deepPurple),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Folder.getStaticPages(
+                child: widget.getStaticPages(
                     Folder.staticTabs[_selectedTab]['title'], context),
               )),
         )

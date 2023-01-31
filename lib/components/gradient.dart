@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 
 // TODO Add final comments
+// TODO Look into memoizing
+// TODO Look into alternatives to the implementation of the effect
 class GradientWid extends StatefulWidget {
-  const GradientWid({super.key});
+  const GradientWid(
+      {super.key,
+      this.colors = const [
+        Colors.indigo,
+        Colors.deepPurpleAccent,
+        Colors.pink,
+      ],
+      this.scale = 4});
 
-  //final Widget child;
+  final List<ColorSwatch<int>> colors;
+  final double scale;
 
   @override
   State<GradientWid> createState() => _GradientWidState();
@@ -45,8 +55,8 @@ class _GradientWidState extends State<GradientWid>
     });
   }
 
-  DecorationTween _getTween(
-      BuildContext context, double mouseX, double mouseY, double scale) {
+  DecorationTween _getTween(BuildContext context, double mouseX, double mouseY,
+      double scale, List<Color> colors) {
     Alignment beginBegin;
     Alignment beginEnd;
     Alignment endBegin;
@@ -102,22 +112,14 @@ class _GradientWidState extends State<GradientWid>
           gradient: LinearGradient(
             begin: beginBegin,
             end: beginEnd,
-            colors: const <Color>[
-              Colors.indigo,
-              Colors.deepPurpleAccent,
-              Colors.pink,
-            ],
+            colors: widget.colors,
           ),
         ),
         end: BoxDecoration(
           gradient: LinearGradient(
             begin: endEnd,
             end: endBegin,
-            colors: const <Color>[
-              Colors.indigo,
-              Colors.deepPurpleAccent,
-              Colors.pink,
-            ],
+            colors: widget.colors,
           ),
         ));
   }
@@ -131,8 +133,8 @@ class _GradientWidState extends State<GradientWid>
         onHover: _updateLocation,
         onExit: _clearLocation,
         child: DecoratedBoxTransition(
-          decoration:
-              _getTween(context, _x, _y, 2).animate(_animationController),
+          decoration: _getTween(context, _x, _y, widget.scale, widget.colors)
+              .animate(_animationController),
           child: Container(),
         ),
       ),
