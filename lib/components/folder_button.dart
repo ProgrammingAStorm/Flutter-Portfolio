@@ -40,9 +40,7 @@ class _FolderButtonState extends State<FolderButton> {
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(5), topRight: Radius.circular(5)),
-                side: BorderSide(
-                    color: Colors.deepPurple,
-                    strokeAlign: StrokeAlign.outside))),
+                side: BorderSide(color: Colors.deepPurple, strokeAlign: 1.0))),
         onPressed: () => {widget.setTab(widget.count)},
         child: Text(
           widget.title,

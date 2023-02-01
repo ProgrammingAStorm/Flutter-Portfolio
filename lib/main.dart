@@ -22,7 +22,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       //title: 'ProgrammingAStorm',
       // TODO Set up theme with light and dark color palettes
-      //theme: ThemeData(),
+      theme: ThemeData(
+          textTheme: TextTheme(
+              displayMedium:
+                  TextStyle(color: Colors.deepPurpleAccent.shade100))),
       //home: const MainMenu(),
       builder: (context, child) => ResponsiveWrapper.builder(
         BouncingScrollWrapper.builder(context, child!),

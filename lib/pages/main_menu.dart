@@ -11,12 +11,12 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-  List<ColorSwatch<int>> _colors = [
+  List<Color> _colors = [
     Colors.indigo,
     Colors.deepPurpleAccent,
     Colors.pink,
   ];
-  double _scale = 4;
+  double _scale = 1;
 
   // TODO Look into statemangement to make this whole process more streamlined
   void _setScale(double scale) {
@@ -25,7 +25,7 @@ class _MainMenuState extends State<MainMenu> {
     });
   }
 
-  void _setColors(List<ColorSwatch<int>> colors) {
+  void _setColors(List<Color> colors) {
     setState(() {
       _colors = colors;
     });
