@@ -8,10 +8,6 @@ class Settings extends StatelessWidget {
   final Function setScale;
   final Function setColors;
 
-  // TODO Allow gradient color changing
-  // TODO Allow gradient mouse effect resizing
-  // TODO Allow color theme changing
-  // TODO Allow gradient speend changing
   // TODO Explaind gradient mouse effect with modal
   // TODO Put each section into a dropdown or a folddown
   @override
@@ -22,27 +18,97 @@ class Settings extends StatelessWidget {
           'Settings',
           style: TextStyle(color: Colors.deepPurpleAccent.shade100),
         ),
-        SettingsForm(setScale: setScale, setColors: setColors)
+        ScaleForm(setScale: setScale),
+        ColorChanger(setColors: setColors)
       ],
     );
   }
 }
 
-class SettingsForm extends StatefulWidget {
-  const SettingsForm(
-      {super.key, required this.setScale, required this.setColors});
+class ScaleForm extends StatefulWidget {
+  const ScaleForm({super.key, required this.setScale});
 
   final Function setScale;
-  final Function setColors;
 
   @override
-  State<SettingsForm> createState() => _SettingsFormState();
+  State<ScaleForm> createState() => _ScaleFormState();
 }
 
-class _SettingsFormState extends State<SettingsForm> {
+class _ScaleFormState extends State<ScaleForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   double _scale = 4;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      onChanged: () {
+        Form.of(primaryFocus!.context!).save();
+      },
+      child: Column(
+        children: [
+          const Text(
+              "This number affects the spread of gradient as it follows the mouse. The size of the screen is divided by this number, and the result is used to calculate the gradient. This number will only affect the mouse effect. The default is 1."),
+          TextFormField(
+            decoration: const InputDecoration(hintText: "Scale"),
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9+\.]')),
+            ],
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter a number.';
+              }
+              return null;
+            },
+            onSaved: (newValue) {
+              _scale = double.parse(newValue!);
+            },
+          ),
+          Container(
+            margin: const EdgeInsets.all(5),
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(5),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          widget.setScale(_scale);
+                          _formKey.currentState!.reset();
+                        }
+                      },
+                      child: const Text("Submit")),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(5),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        widget.setScale(1);
+                        _formKey.currentState!.reset();
+                      },
+                      child: const Text("Reset")),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class ColorChanger extends StatefulWidget {
+  const ColorChanger({super.key, required this.setColors});
+
+  final Function setColors;
+
+  @override
+  State<ColorChanger> createState() => _ColorChangerState();
+}
+
+class _ColorChangerState extends State<ColorChanger> {
   List<Color> _stagedColors = [];
   Color _pickedColor = Colors.deepPurple;
 
@@ -72,158 +138,99 @@ class _SettingsFormState extends State<SettingsForm> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Form(
-          key: _formKey,
-          onChanged: () {
-            Form.of(primaryFocus!.context!).save();
-          },
-          child: Column(
-            children: [
-              const Text(
-                  "This number affects the spread of gradient as it follows the mouse. The size of the screen is divided by this number, and the result is used to calculate the gradient. This number will only affect the mouse effect. The default is 1."),
-              TextFormField(
-                decoration: const InputDecoration(hintText: "Scale"),
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9+\.]')),
-                ],
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a number.';
-                  }
-                  return null;
-                },
-                onSaved: (newValue) {
-                  _scale = double.parse(newValue!);
-                },
-              ),
-              Container(
-                margin: const EdgeInsets.all(5),
-                child: Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(5),
-                      child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              widget.setScale(_scale);
-                              _formKey.currentState!.reset();
-                            }
-                          },
-                          child: const Text("Submit")),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(5),
-                      child: ElevatedButton(
-                          onPressed: () {
-                            widget.setScale(1);
-                            _formKey.currentState!.reset();
-                          },
-                          child: const Text("Reset")),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
+        Wrap(
+          children: getColoredBoxes(_stagedColors),
         ),
-        Column(
+        Row(
           children: [
-            Wrap(
-              children: getColoredBoxes(_stagedColors),
+            Container(
+              margin: const EdgeInsets.all(5),
+              child: ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: ((context) {
+                          return AlertDialog(
+                            actions: [
+                              ElevatedButton(
+                                  onPressed: () => setState(() {
+                                        _stagedColors.add(_pickedColor);
+                                      }),
+                                  child: const Text("Add"))
+                            ],
+                            backgroundColor: Colors.deepPurpleAccent,
+                            contentPadding: const EdgeInsets.all(5),
+                            content: SingleChildScrollView(
+                              child: Container(
+                                color: Colors.deepPurple,
+                                child: ColorPicker(
+                                  onColorChanged: ((value) => setState(() {
+                                        _pickedColor = value;
+                                      })),
+                                  pickerColor: Colors.deepPurple,
+                                ),
+                              ),
+                            ),
+                          );
+                        }));
+                  },
+                  child: const Text("Color Picker")),
             ),
-            Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.all(5),
-                  child: ElevatedButton(
-                      onPressed: () {
+            Container(
+              margin: const EdgeInsets.all(5),
+              child: ElevatedButton(
+                  onPressed: () {
+                    clearColors();
+                    widget.setColors([
+                      Colors.indigo,
+                      Colors.deepPurpleAccent,
+                      Colors.pink,
+                    ]);
+                  },
+                  child: const Text("Clear")),
+            ),
+            Container(
+                margin: const EdgeInsets.all(5),
+                child: ElevatedButton(
+                    onPressed: () {
+                      if (_stagedColors.length < 2) {
                         showDialog(
                             context: context,
                             builder: ((context) {
                               return AlertDialog(
                                 actions: [
                                   ElevatedButton(
-                                      onPressed: () => setState(() {
-                                            _stagedColors.add(_pickedColor);
-                                          }),
-                                      child: const Text("Add"))
+                                      onPressed: () {
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop('dialog');
+                                      },
+                                      child: const Text("Got it."))
                                 ],
                                 backgroundColor: Colors.deepPurpleAccent,
                                 contentPadding: const EdgeInsets.all(5),
                                 content: SingleChildScrollView(
                                   child: Container(
                                     color: Colors.deepPurple,
-                                    child: ColorPicker(
-                                      onColorChanged: ((value) => setState(() {
-                                            _pickedColor = value;
-                                          })),
-                                      pickerColor: Colors.deepPurple,
+                                    child: Column(
+                                      children: const [
+                                        Text("Caution!"),
+                                        Text(
+                                            "The gradient requires at least two colors.")
+                                      ],
                                     ),
                                   ),
                                 ),
                               );
                             }));
-                      },
-                      child: const Text("Color Picker")),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(5),
-                  child: ElevatedButton(
-                      onPressed: () {
+                      } else {
+                        widget.setColors(_stagedColors);
                         clearColors();
-                        widget.setColors([
-                          Colors.indigo,
-                          Colors.deepPurpleAccent,
-                          Colors.pink,
-                        ]);
-                      },
-                      child: const Text("Clear")),
-                ),
-                Container(
-                    margin: const EdgeInsets.all(5),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          if (_stagedColors.length < 2) {
-                            showDialog(
-                                context: context,
-                                builder: ((context) {
-                                  return AlertDialog(
-                                    actions: [
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.of(context,
-                                                    rootNavigator: true)
-                                                .pop('dialog');
-                                          },
-                                          child: const Text("Got it."))
-                                    ],
-                                    backgroundColor: Colors.deepPurpleAccent,
-                                    contentPadding: const EdgeInsets.all(5),
-                                    content: SingleChildScrollView(
-                                      child: Container(
-                                        color: Colors.deepPurple,
-                                        child: Column(
-                                          children: const [
-                                            Text("Caution!"),
-                                            Text(
-                                                "The gradient requires at least two colors.")
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }));
-                          } else {
-                            widget.setColors(_stagedColors);
-                            clearColors();
-                          }
-                        },
-                        child: const Text("Submit")))
-              ],
-            ),
+                      }
+                    },
+                    child: const Text("Submit")))
           ],
-        )
+        ),
       ],
     );
   }
