@@ -11,10 +11,10 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-  List<Color> _colors = [
-    Colors.indigo,
-    Colors.deepPurpleAccent,
-    Colors.pink,
+  List<Color> _colors = const [
+    Color(0xFF3F51B5),
+    Color(0xFF7C4DFF),
+    Color(0xFFE91E63),
   ];
   double _scale = 1;
 
@@ -39,7 +39,6 @@ class _MainMenuState extends State<MainMenu> {
           GradientWid(colors: _colors, scale: _scale),
           SingleChildScrollView(
             child: Column(
-              //mainAxisSize: MainAxisSize.min,
               children: [
                 const Logo(),
                 Folder(

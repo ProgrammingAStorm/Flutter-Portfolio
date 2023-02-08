@@ -8,8 +8,8 @@ import 'package:portfolio/pages/contents.dart';
 class Folder extends StatefulWidget {
   const Folder({super.key, required this.setScale, required this.setColors});
 
-  final setScale;
-  final setColors;
+  final Function setScale;
+  final Function setColors;
 
   Widget? getStaticPages(String page, BuildContext context) {
     Map<String, Widget> pages = {

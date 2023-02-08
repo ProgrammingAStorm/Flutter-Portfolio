@@ -43,12 +43,12 @@ class _SettingsFormState extends State<SettingsForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   double _scale = 4;
-  final List<Color> _stagedColors = [];
+  List<Color> _stagedColors = [];
   Color _pickedColor = Colors.deepPurple;
 
   void clearColors() {
     setState(() {
-      _stagedColors.clear();
+      _stagedColors = [];
     });
   }
 
@@ -152,17 +152,13 @@ class _SettingsFormState extends State<SettingsForm> {
                                 backgroundColor: Colors.deepPurpleAccent,
                                 contentPadding: const EdgeInsets.all(5),
                                 content: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
                                   child: Container(
                                     color: Colors.deepPurple,
-                                    child: SingleChildScrollView(
-                                      child: ColorPicker(
-                                        onColorChanged: ((value) =>
-                                            setState(() {
-                                              _pickedColor = value;
-                                            })),
-                                        pickerColor: Colors.deepPurple,
-                                      ),
+                                    child: ColorPicker(
+                                      onColorChanged: ((value) => setState(() {
+                                            _pickedColor = value;
+                                          })),
+                                      pickerColor: Colors.deepPurple,
                                     ),
                                   ),
                                 ),
@@ -174,17 +170,54 @@ class _SettingsFormState extends State<SettingsForm> {
                 Container(
                   margin: const EdgeInsets.all(5),
                   child: ElevatedButton(
-                      onPressed: () => setState(() {
-                            _stagedColors.clear();
-                          }),
+                      onPressed: () {
+                        clearColors();
+                        widget.setColors([
+                          Colors.indigo,
+                          Colors.deepPurpleAccent,
+                          Colors.pink,
+                        ]);
+                      },
                       child: const Text("Clear")),
                 ),
                 Container(
                     margin: const EdgeInsets.all(5),
                     child: ElevatedButton(
                         onPressed: () {
-                          widget.setColors(_stagedColors);
-                          clearColors();
+                          if (_stagedColors.length < 2) {
+                            showDialog(
+                                context: context,
+                                builder: ((context) {
+                                  return AlertDialog(
+                                    actions: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context,
+                                                    rootNavigator: true)
+                                                .pop('dialog');
+                                          },
+                                          child: const Text("Got it."))
+                                    ],
+                                    backgroundColor: Colors.deepPurpleAccent,
+                                    contentPadding: const EdgeInsets.all(5),
+                                    content: SingleChildScrollView(
+                                      child: Container(
+                                        color: Colors.deepPurple,
+                                        child: Column(
+                                          children: const [
+                                            Text("Caution!"),
+                                            Text(
+                                                "The gradient requires at least two colors.")
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }));
+                          } else {
+                            widget.setColors(_stagedColors);
+                            clearColors();
+                          }
                         },
                         child: const Text("Submit")))
               ],
