@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/components/settings.dart';
-import 'package:portfolio/components/welcome.dart';
-import 'package:portfolio/pages/contents.dart';
+import './settings.dart';
+import './welcome.dart';
+import 'package:portfolio/pages/contents/contents.dart';
 
 class Folder extends StatefulWidget {
   const Folder({super.key, required this.setScale, required this.setColors});

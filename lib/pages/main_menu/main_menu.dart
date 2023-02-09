@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/components/gradient.dart';
-import '../components/folder.dart';
-import '../components/logo.dart';
+import './components/gradient.dart';
+import './components/folder.dart';
+import './components/logo.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({super.key});

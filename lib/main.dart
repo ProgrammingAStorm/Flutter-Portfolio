@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/pages/main_menu.dart';
+import 'package:portfolio/pages/main_menu/main_menu.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 void main() {
