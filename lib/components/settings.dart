@@ -2,24 +2,89 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
   const Settings({super.key, required this.setScale, required this.setColors});
 
   final Function setScale;
   final Function setColors;
 
+  @override
+  State<Settings> createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
+  final List<bool> _isOpen = [false, false];
+
   // TODO Explaind gradient mouse effect with modal
-  // TODO Put each section into a dropdown or a folddown
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          'Settings',
-          style: TextStyle(color: Colors.deepPurpleAccent.shade100),
+        Container(
+          margin: const EdgeInsets.only(top: 5, bottom: 10),
+          child: Text(
+            'Settings',
+            style: TextStyle(color: Colors.deepPurpleAccent.shade100),
+          ),
         ),
-        ScaleForm(setScale: setScale),
-        ColorChanger(setColors: setColors)
+        ExpansionPanelList(
+          expansionCallback: (i, isOpen) {
+            setState(() {
+              _isOpen[i] = !isOpen;
+            });
+          },
+          children: [
+            ExpansionPanel(
+                backgroundColor: Colors.deepPurpleAccent,
+                canTapOnHeader: true,
+                isExpanded: _isOpen[0],
+                headerBuilder: (context, isOpen) {
+                  return Container(
+                    margin: const EdgeInsets.all(5),
+                    child: const Center(
+                      child: Text(
+                        'Scale',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                },
+                body: Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        color: Colors.deepPurple,
+                        border: Border.all(
+                            color: Colors.deepPurpleAccent, width: 3)),
+                    child: ScaleForm(setScale: widget.setScale))),
+            ExpansionPanel(
+                backgroundColor: Colors.deepPurpleAccent,
+                canTapOnHeader: true,
+                isExpanded: _isOpen[1],
+                headerBuilder: (context, isOpen) {
+                  return Container(
+                    padding: const EdgeInsets.all(5),
+                    child: const Center(
+                      child: Text(
+                        'Color',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                },
+                body: Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        color: Colors.deepPurple,
+                        border: Border.all(
+                            color: Colors.deepPurpleAccent, width: 3)),
+                    child: ColorChanger(setColors: widget.setColors)))
+          ],
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 10),
+          child: ElevatedButton(
+              onPressed: () {}, child: const Text("Explanation")),
+        )
       ],
     );
   }
@@ -138,8 +203,13 @@ class _ColorChangerState extends State<ColorChanger> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
-          children: getColoredBoxes(_stagedColors),
+        const Text(
+            "Here you can use this color picked to select which colors you would like to use for the effect. The effect requires that at least two colors be selected."),
+        Container(
+          margin: const EdgeInsets.all(5),
+          child: Wrap(
+            children: getColoredBoxes(_stagedColors),
+          ),
         ),
         Row(
           children: [

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-// TODO Add final comments
-// TODO Look into memoizing
 // TODO Look into alternatives to the implementation of the effect
 class GradientWid extends StatefulWidget {
   const GradientWid({super.key, required this.colors, this.scale = 1});
