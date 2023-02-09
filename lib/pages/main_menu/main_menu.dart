@@ -37,15 +37,20 @@ class _MainMenuState extends State<MainMenu> {
       body: Stack(
         children: [
           GradientWid(colors: _colors, scale: _scale),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                const Logo(),
-                Folder(
-                  setScale: _setScale,
-                  setColors: _setColors,
-                )
-              ],
+          Container(
+            alignment: Alignment.topCenter,
+            margin: const EdgeInsets.all(10),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Logo(),
+                  Folder(
+                    setScale: _setScale,
+                    setColors: _setColors,
+                  )
+                ],
+              ),
             ),
           )
         ],

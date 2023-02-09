@@ -10,8 +10,7 @@ class Logo extends StatelessWidget {
       margin: const EdgeInsets.only(top: 10, bottom: 5, left: 5, right: 5),
       //width: min(500, MediaQuery.of(context).size.width),
       height: 80,
-      child: Center(
-          child: Stack(
+      child: Stack(
         children: [
           Text(
             "ProgrammingAStorm",
@@ -42,7 +41,7 @@ class Logo extends StatelessWidget {
             //     ScaleSize.textScaleFactor(context, maxTextScaleFactor: 1.6),
           )
         ],
-      )),
+      ),
     );
   }
 }

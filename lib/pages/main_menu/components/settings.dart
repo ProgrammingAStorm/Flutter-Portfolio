@@ -83,7 +83,20 @@ class _SettingsState extends State<Settings> {
         Container(
           margin: const EdgeInsets.only(top: 10),
           child: ElevatedButton(
-              onPressed: () {}, child: const Text("Explanation")),
+              onPressed: () => showDialog(
+                  context: context,
+                  builder: ((context) {
+                    return AlertDialog(
+                      backgroundColor: Colors.deepPurpleAccent,
+                      content: SingleChildScrollView(
+                          child: Container(
+                        //padding: const EdgeInsets.all(5),
+                        color: Colors.deepPurple,
+                        child: Text("nigger"),
+                      )),
+                    );
+                  })),
+              child: const Text("Explanation")),
         )
       ],
     );
