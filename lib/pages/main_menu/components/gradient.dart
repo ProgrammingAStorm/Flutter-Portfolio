@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 // TODO Look into alternatives to the implementation of the effect
+// TODO Mess with having multiple tweens
 class GradientWid extends StatefulWidget {
   const GradientWid({super.key, required this.colors, this.scale = 1});
 
@@ -62,40 +63,40 @@ class _GradientWidState extends State<GradientWid>
       final double viewWidth = MediaQuery.of(context).size.width;
       final double viewHeight = MediaQuery.of(context).size.height;
 
-      final double rotationWidth = viewWidth / scale;
-      final double rotationHeight = viewHeight / scale;
+      final double rotationSquareWidth = viewWidth / scale;
+      final double rotationSquareHeight = viewHeight / scale;
 
       final Map<String, Map<String, double>> rotationPoints = {
         "a": {
-          "x": mouseX - (rotationWidth / 2),
-          "y": mouseY - (rotationHeight / 2)
+          "x": mouseX - (rotationSquareWidth / 2),
+          "y": mouseY - (rotationSquareHeight / 2)
         },
         "b": {
-          "x": mouseX + (rotationWidth / 2),
-          "y": mouseY - (rotationHeight / 2)
+          "x": mouseX + (rotationSquareWidth / 2),
+          "y": mouseY - (rotationSquareHeight / 2)
         },
         "c": {
-          "x": mouseX + (rotationWidth / 2),
-          "y": mouseY + (rotationHeight / 2)
+          "x": mouseX + (rotationSquareWidth / 2),
+          "y": mouseY + (rotationSquareHeight / 2)
         },
         "d": {
-          "x": mouseX - (rotationWidth / 2),
-          "y": mouseY + (rotationHeight / 2)
+          "x": mouseX - (rotationSquareWidth / 2),
+          "y": mouseY + (rotationSquareHeight / 2)
         }
       };
 
       beginBegin = Alignment(
-          (-viewWidth + (2 * rotationPoints["b"]!["x"]!)) / viewWidth,
-          (-viewHeight + (2 * rotationPoints["b"]!["y"]!)) / viewHeight);
+          ((2 * rotationPoints["b"]!["x"]!) - viewWidth) / viewWidth,
+          ((2 * rotationPoints["b"]!["y"]!) - viewHeight) / viewHeight);
       beginEnd = Alignment(
-          (-viewWidth + (2 * rotationPoints["d"]!["x"]!)) / viewWidth,
-          (-viewHeight + (2 * rotationPoints["d"]!["y"]!)) / viewHeight);
+          ((2 * rotationPoints["d"]!["x"]!) - viewWidth) / viewWidth,
+          ((2 * rotationPoints["d"]!["y"]!) - viewHeight) / viewHeight);
       endBegin = Alignment(
-          (-viewWidth + (2 * rotationPoints["a"]!["x"]!)) / viewWidth,
-          (-viewHeight + (2 * rotationPoints["a"]!["y"]!)) / viewHeight);
+          ((2 * rotationPoints["c"]!["x"]!) - viewWidth) / viewWidth,
+          ((2 * rotationPoints["c"]!["y"]!) - viewHeight) / viewHeight);
       endEnd = Alignment(
-          (-viewWidth + (2 * rotationPoints["c"]!["x"]!)) / viewWidth,
-          (-viewHeight + (2 * rotationPoints["c"]!["y"]!)) / viewHeight);
+          ((2 * rotationPoints["a"]!["x"]!) - viewWidth) / viewWidth,
+          ((2 * rotationPoints["a"]!["y"]!) - viewHeight) / viewHeight);
     }
 
     return DecorationTween(
@@ -103,14 +104,14 @@ class _GradientWidState extends State<GradientWid>
           gradient: LinearGradient(
             begin: beginBegin,
             end: beginEnd,
-            colors: widget.colors.reversed.toList(),
+            colors: widget.colors,
           ),
         ),
         end: BoxDecoration(
           gradient: LinearGradient(
             begin: endBegin,
             end: endEnd,
-            colors: widget.colors.reversed.toList(),
+            colors: widget.colors,
           ),
         ));
   }
