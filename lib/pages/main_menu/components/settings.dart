@@ -518,7 +518,7 @@ List<Color> _colors = const [
   Color(0xFF7C4DFF),
   Color(0xFFE91E63),
 ];
-double _scale = 0.33;
+double _scale = 1;
 
 void _setScale(double scale) {
   setState(() {

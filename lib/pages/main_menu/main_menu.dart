@@ -16,7 +16,7 @@ class _MainMenuState extends State<MainMenu> {
     Color(0xFF7C4DFF),
     Color(0xFFE91E63),
   ];
-  double _scale = 0.33;
+  double _scale = 1;
 
   // TODO Look into statemangement to make this whole process more streamlined
   void _setScale(double scale) {
