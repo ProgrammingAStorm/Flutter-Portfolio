@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/pages/main_menu/components/construction.dart';
+import 'package:portfolio/pages/main_menu/components/web_dev_book.dart';
 import './settings.dart';
 import './welcome.dart';
-import 'package:portfolio/pages/contents/contents.dart';
 
 class Folder extends StatefulWidget {
   const Folder({super.key, required this.setScale, required this.setColors});
@@ -12,43 +13,14 @@ class Folder extends StatefulWidget {
   Widget? getStaticPages(String page, BuildContext context) {
     Map<String, Widget> pages = {
       "Welcome": const Welcome(),
-      "Web Dev's Handbook": Column(
-        children: [
-          Text(
-            "Web Dev's Handbook",
-            style: TextStyle(color: Colors.deepPurpleAccent.shade100),
-          ),
-          TextButton(
-              onPressed: () => {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Contents()))
-                  },
-              child: const Text("Go"))
-        ],
-      ),
-      "Interactive Resume": Column(
-        children: [
-          Text(
-            'Interactive Resume',
-            style: TextStyle(color: Colors.deepPurpleAccent.shade100),
-          )
-        ],
-      ),
-      "Projects": const Text("Projects"),
+      "Web Dev's Handbook": const Construction(),
+      "Interactive Resume": const Construction(),
+      "Projects": const Construction(),
       "Settings": Settings(
         setScale: setScale,
         setColors: setColors,
       ),
-      "Credits": Column(
-        children: [
-          Text(
-            'Credits',
-            style: TextStyle(color: Colors.deepPurpleAccent.shade100),
-          )
-        ],
-      ),
+      "Credits": const Construction(),
     };
 
     return pages[page];
