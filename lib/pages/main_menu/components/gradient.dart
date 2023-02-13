@@ -85,17 +85,17 @@ class _GradientWidState extends State<GradientWid>
       };
 
       beginBegin = Alignment(
-          (-viewWidth + (2 * rotationPoints["a"]!["x"]!)) / viewWidth,
-          (-viewHeight + (2 * rotationPoints["a"]!["y"]!)) / viewHeight);
-      beginEnd = Alignment(
-          (-viewWidth + (2 * rotationPoints["c"]!["x"]!)) / viewWidth,
-          (-viewHeight + (2 * rotationPoints["c"]!["y"]!)) / viewHeight);
-      endBegin = Alignment(
           (-viewWidth + (2 * rotationPoints["b"]!["x"]!)) / viewWidth,
           (-viewHeight + (2 * rotationPoints["b"]!["y"]!)) / viewHeight);
-      endEnd = Alignment(
+      beginEnd = Alignment(
           (-viewWidth + (2 * rotationPoints["d"]!["x"]!)) / viewWidth,
           (-viewHeight + (2 * rotationPoints["d"]!["y"]!)) / viewHeight);
+      endBegin = Alignment(
+          (-viewWidth + (2 * rotationPoints["a"]!["x"]!)) / viewWidth,
+          (-viewHeight + (2 * rotationPoints["a"]!["y"]!)) / viewHeight);
+      endEnd = Alignment(
+          (-viewWidth + (2 * rotationPoints["c"]!["x"]!)) / viewWidth,
+          (-viewHeight + (2 * rotationPoints["c"]!["y"]!)) / viewHeight);
     }
 
     return DecorationTween(
@@ -103,14 +103,14 @@ class _GradientWidState extends State<GradientWid>
           gradient: LinearGradient(
             begin: beginBegin,
             end: beginEnd,
-            colors: widget.colors,
+            colors: widget.colors.reversed.toList(),
           ),
         ),
         end: BoxDecoration(
           gradient: LinearGradient(
-            begin: endEnd,
-            end: endBegin,
-            colors: widget.colors,
+            begin: endBegin,
+            end: endEnd,
+            colors: widget.colors.reversed.toList(),
           ),
         ));
   }
