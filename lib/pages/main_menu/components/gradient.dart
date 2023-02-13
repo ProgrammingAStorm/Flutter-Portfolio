@@ -92,11 +92,11 @@ class _GradientWidState extends State<GradientWid>
           ((2 * rotationPoints["d"]!["x"]!) - viewWidth) / viewWidth,
           ((2 * rotationPoints["d"]!["y"]!) - viewHeight) / viewHeight);
       endBegin = Alignment(
-          ((2 * rotationPoints["c"]!["x"]!) - viewWidth) / viewWidth,
-          ((2 * rotationPoints["c"]!["y"]!) - viewHeight) / viewHeight);
-      endEnd = Alignment(
           ((2 * rotationPoints["a"]!["x"]!) - viewWidth) / viewWidth,
           ((2 * rotationPoints["a"]!["y"]!) - viewHeight) / viewHeight);
+      endEnd = Alignment(
+          ((2 * rotationPoints["c"]!["x"]!) - viewWidth) / viewWidth,
+          ((2 * rotationPoints["c"]!["y"]!) - viewHeight) / viewHeight);
     }
 
     return DecorationTween(

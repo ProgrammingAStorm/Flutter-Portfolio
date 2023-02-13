@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ProgrammingAStorm',
       // TODO Set up theme
+      // TODO Allow theme manipulation
       theme: ThemeData(
           textTheme: TextTheme(
               displayMedium:
