@@ -8,8 +8,6 @@ void main() {
 
 // TODO In general make sure to go back and clean up and refactor code as need once the main page is done
 // TODO Make sure everything is well commented
-// TODO Make sure app is mobile responsive
-// TODO Look into fonts
 // TODO Update favicon
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,7 +17,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ProgrammingAStorm',
-      // TODO Set up theme
       // TODO Allow theme manipulation
       theme: ThemeData(
           // buttonTheme: const ButtonThemeData(
