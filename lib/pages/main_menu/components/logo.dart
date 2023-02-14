@@ -9,14 +9,14 @@ class Logo extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 10, bottom: 5, left: 5, right: 5),
       //width: min(500, MediaQuery.of(context).size.width),
-      height: 80,
+      height: 135,
       child: Stack(
         children: [
           Text(
             "ProgrammingAStorm",
             style: TextStyle(
                 fontFamily: "BigMisterC",
-                fontSize: 55,
+                fontSize: 135,
                 foreground: Paint()
                   ..style = PaintingStyle.stroke
                   ..strokeWidth = 5
@@ -28,7 +28,7 @@ class Logo extends StatelessWidget {
             "ProgrammingAStorm",
             style: TextStyle(
                 fontFamily: "BigMisterC",
-                fontSize: 55,
+                fontSize: 135,
                 fontWeight: FontWeight.w300,
                 color: Colors.deepPurpleAccent,
                 shadows: [

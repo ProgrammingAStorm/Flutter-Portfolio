@@ -72,28 +72,30 @@ class _FolderState extends State<Folder> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 20, right: 20),
-      child: Column(children: [
-        Wrap(
-            verticalDirection: VerticalDirection.up,
-            children: Folder.generateTabs(_selectedTab, _setTab)),
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: const BoxDecoration(
-              color: Colors.deepPurpleAccent,
-              borderRadius: BorderRadius.all(Radius.circular(5))),
-          child: Container(
-              width: 750,
-              decoration: const BoxDecoration(color: Colors.deepPurple),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: widget.getStaticPages(
-                    Folder.staticTabs[_selectedTab]['title'], context),
-              )),
-        )
-      ]),
-    );
+    return Column(children: [
+      Wrap(
+          verticalDirection: VerticalDirection.up,
+          children: Folder.generateTabs(_selectedTab, _setTab)),
+      Container(
+        padding: const EdgeInsets.all(5),
+        //margin: const EdgeInsets.only(bottom: 200, left: 250, right: 250),
+        decoration: BoxDecoration(
+            color: Colors.deepPurpleAccent,
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.deepPurpleAccent.shade700,
+                  blurRadius: 2,
+                  offset: Offset.fromDirection(0))
+            ]),
+        child: Container(
+            padding: const EdgeInsets.all(5),
+            width: 1000,
+            decoration: const BoxDecoration(color: Colors.deepPurple),
+            child: widget.getStaticPages(
+                Folder.staticTabs[_selectedTab]['title'], context)),
+      )
+    ]);
   }
 }
 
@@ -141,9 +143,7 @@ class _FolderButtonState extends State<FolderButton> {
         onPressed: () => {widget.setTab(widget.count)},
         child: Text(
           widget.title,
-          style: TextStyle(
-              color: Colors.deepPurpleAccent.shade100,
-              fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.displaySmall,
         ),
       ),
     );

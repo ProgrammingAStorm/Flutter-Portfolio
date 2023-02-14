@@ -21,90 +21,79 @@ class _SettingsState extends State<Settings> {
   // TODO Explaind gradient mouse effect with modal
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ExpansionPanelList(
+      expansionCallback: (i, isOpen) {
+        setState(() {
+          _isOpen[i] = !isOpen;
+        });
+      },
       children: [
-        Container(
-          margin: const EdgeInsets.only(top: 5, bottom: 10),
-          child: Text(
-            'Settings',
-            style: TextStyle(color: Colors.deepPurpleAccent.shade100),
-          ),
-        ),
-        ExpansionPanelList(
-          expansionCallback: (i, isOpen) {
-            setState(() {
-              _isOpen[i] = !isOpen;
-            });
-          },
-          children: [
-            ExpansionPanel(
-                backgroundColor: Colors.deepPurpleAccent,
-                canTapOnHeader: true,
-                isExpanded: _isOpen[0],
-                headerBuilder: (context, isOpen) {
-                  return Container(
-                    margin: const EdgeInsets.all(5),
-                    child: const Center(
-                      child: Text(
-                        'Scale',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  );
-                },
-                body: Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        border: Border.all(
-                            color: Colors.deepPurpleAccent, width: 3)),
-                    child: ScaleForm(setScale: widget.setScale))),
-            ExpansionPanel(
-                backgroundColor: Colors.deepPurpleAccent,
-                canTapOnHeader: true,
-                isExpanded: _isOpen[1],
-                headerBuilder: (context, isOpen) {
-                  return Container(
-                    padding: const EdgeInsets.all(5),
-                    child: const Center(
-                      child: Text(
-                        'Color',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  );
-                },
-                body: Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        border: Border.all(
-                            color: Colors.deepPurpleAccent, width: 3)),
-                    child: ColorChanger(setColors: widget.setColors))),
-            ExpansionPanel(
-                backgroundColor: Colors.deepPurpleAccent,
-                canTapOnHeader: true,
-                isExpanded: _isOpen[2],
-                headerBuilder: (context, isOpen) {
-                  return Container(
-                    padding: const EdgeInsets.all(5),
-                    child: const Center(
-                      child: Text(
-                        'Explanation',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  );
-                },
-                body: Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        border: Border.all(
-                            color: Colors.deepPurpleAccent, width: 3)),
-                    child: Explanation())),
-          ],
-        ),
+        ExpansionPanel(
+            backgroundColor: Colors.deepPurpleAccent,
+            canTapOnHeader: true,
+            isExpanded: _isOpen[0],
+            headerBuilder: (context, isOpen) {
+              return Container(
+                margin: const EdgeInsets.all(5),
+                child: const Center(
+                  child: Text(
+                    'Scale',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              );
+            },
+            body: Container(
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple,
+                  border: Border.all(color: Colors.deepPurpleAccent, width: 3),
+                ),
+                child: ScaleForm(setScale: widget.setScale))),
+        ExpansionPanel(
+            backgroundColor: Colors.deepPurpleAccent,
+            canTapOnHeader: true,
+            isExpanded: _isOpen[1],
+            headerBuilder: (context, isOpen) {
+              return Container(
+                padding: const EdgeInsets.all(5),
+                child: const Center(
+                  child: Text(
+                    'Color',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              );
+            },
+            body: Container(
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple,
+                    border:
+                        Border.all(color: Colors.deepPurpleAccent, width: 3)),
+                child: ColorChanger(setColors: widget.setColors))),
+        ExpansionPanel(
+            backgroundColor: Colors.deepPurpleAccent,
+            canTapOnHeader: true,
+            isExpanded: _isOpen[2],
+            headerBuilder: (context, isOpen) {
+              return Container(
+                padding: const EdgeInsets.all(5),
+                child: const Center(
+                  child: Text(
+                    'Explanation',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              );
+            },
+            body: Container(
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple,
+                    border:
+                        Border.all(color: Colors.deepPurpleAccent, width: 3)),
+                child: const Explanation())),
       ],
     );
   }
@@ -133,11 +122,14 @@ class _ScaleFormState extends State<ScaleForm> {
       },
       child: Column(
         children: [
-          const Text(
-              "This number affects the spread of gradient as it follows the mouse. The size of the screen is divided by this number, and the result is used to calculate the gradient. This number will only affect the mouse effect. The default is 0.33."),
+          Text(
+            "This number affects the spread of gradient as it follows the mouse. The size of the screen is divided by this number, and the result is used to calculate the gradient. This number will only affect the mouse effect. The default is 0.33.",
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
           TextFormField(
             decoration: const InputDecoration(hintText: "Scale"),
             keyboardType: TextInputType.number,
+            style: Theme.of(context).textTheme.bodyMedium,
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'[0-9+\.]')),
             ],
@@ -157,6 +149,10 @@ class _ScaleFormState extends State<ScaleForm> {
               children: [
                 Container(
                   margin: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
+                  decoration: const BoxDecoration(
+                      color: Colors.deepPurpleAccent,
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
@@ -164,16 +160,38 @@ class _ScaleFormState extends State<ScaleForm> {
                           _formKey.currentState!.reset();
                         }
                       },
-                      child: const Text("Submit")),
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              side: BorderSide(
+                                  color: Colors.deepPurple, strokeAlign: 1.0))),
+                      child: Text(
+                        "Submit",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )),
                 ),
                 Container(
                   margin: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
+                  decoration: const BoxDecoration(
+                      color: Colors.deepPurpleAccent,
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: ElevatedButton(
                       onPressed: () {
                         widget.setScale(1);
                         _formKey.currentState!.reset();
                       },
-                      child: const Text("Reset")),
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              side: BorderSide(
+                                  color: Colors.deepPurple, strokeAlign: 1.0))),
+                      child: Text("Reset",
+                          style: Theme.of(context).textTheme.bodySmall)),
                 )
               ],
             ),
@@ -223,8 +241,10 @@ class _ColorChangerState extends State<ColorChanger> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text(
-            "Here you can use this color picked to select which colors you would like to use for the effect. The effect requires that at least two colors be selected."),
+        Text(
+          "Here you can use this color picked to select which colors you would like to use for the effect. The effect requires that at least two colors be selected.",
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
         Container(
           margin: const EdgeInsets.all(5),
           child: Wrap(
@@ -235,6 +255,10 @@ class _ColorChangerState extends State<ColorChanger> {
           children: [
             Container(
               margin: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
+              decoration: const BoxDecoration(
+                  color: Colors.deepPurpleAccent,
+                  borderRadius: BorderRadius.all(Radius.circular(5))),
               child: ElevatedButton(
                   onPressed: () {
                     showDialog(
@@ -242,11 +266,30 @@ class _ColorChangerState extends State<ColorChanger> {
                         builder: ((context) {
                           return AlertDialog(
                             actions: [
-                              ElevatedButton(
-                                  onPressed: () => setState(() {
-                                        _stagedColors.add(_pickedColor);
-                                      }),
-                                  child: const Text("Add"))
+                              Container(
+                                padding: const EdgeInsets.all(5),
+                                decoration: const BoxDecoration(
+                                    color: Colors.deepPurpleAccent,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5))),
+                                child: ElevatedButton(
+                                    onPressed: () => setState(() {
+                                          _stagedColors.add(_pickedColor);
+                                        }),
+                                    style: TextButton.styleFrom(
+                                        backgroundColor: Colors.deepPurple,
+                                        shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5)),
+                                            side: BorderSide(
+                                                color: Colors.deepPurple,
+                                                strokeAlign: 1.0))),
+                                    child: Text(
+                                      "Add",
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    )),
+                              )
                             ],
                             backgroundColor: Colors.deepPurpleAccent,
                             contentPadding: const EdgeInsets.all(5),
@@ -265,10 +308,23 @@ class _ColorChangerState extends State<ColorChanger> {
                           );
                         }));
                   },
-                  child: const Text("Color Picker")),
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.deepPurple,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          side: BorderSide(
+                              color: Colors.deepPurple, strokeAlign: 1.0))),
+                  child: Text(
+                    "Color Picker",
+                    style: Theme.of(context).textTheme.bodySmall,
+                  )),
             ),
             Container(
               margin: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
+              decoration: const BoxDecoration(
+                  color: Colors.deepPurpleAccent,
+                  borderRadius: BorderRadius.all(Radius.circular(5))),
               child: ElevatedButton(
                   onPressed: () {
                     clearColors();
@@ -278,10 +334,23 @@ class _ColorChangerState extends State<ColorChanger> {
                       Colors.pink,
                     ]);
                   },
-                  child: const Text("Clear")),
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.deepPurple,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          side: BorderSide(
+                              color: Colors.deepPurple, strokeAlign: 1.0))),
+                  child: Text(
+                    "Clear",
+                    style: Theme.of(context).textTheme.bodySmall,
+                  )),
             ),
             Container(
                 margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
+                    color: Colors.deepPurpleAccent,
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: ElevatedButton(
                     onPressed: () {
                       if (_stagedColors.length < 2) {
@@ -290,13 +359,34 @@ class _ColorChangerState extends State<ColorChanger> {
                             builder: ((context) {
                               return AlertDialog(
                                 actions: [
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .pop('dialog');
-                                      },
-                                      child: const Text("Got it."))
+                                  Container(
+                                    margin: const EdgeInsets.all(5),
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: const BoxDecoration(
+                                        color: Colors.deepPurpleAccent,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5))),
+                                    child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context,
+                                                  rootNavigator: true)
+                                              .pop('dialog');
+                                        },
+                                        style: TextButton.styleFrom(
+                                            backgroundColor: Colors.deepPurple,
+                                            shape: const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5)),
+                                                side: BorderSide(
+                                                    color: Colors.deepPurple,
+                                                    strokeAlign: 1.0))),
+                                        child: Text(
+                                          "Got it.",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall,
+                                        )),
+                                  )
                                 ],
                                 backgroundColor: Colors.deepPurpleAccent,
                                 contentPadding: const EdgeInsets.all(5),
@@ -305,10 +395,19 @@ class _ColorChangerState extends State<ColorChanger> {
                                     color: Colors.deepPurple,
                                     padding: const EdgeInsets.all(15),
                                     child: Column(
-                                      children: const [
-                                        Text("Caution!"),
+                                      children: [
                                         Text(
-                                            "The gradient requires at least two colors.")
+                                          "Caution!",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium,
+                                        ),
+                                        Text(
+                                          "The gradient requires at least two colors.",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall,
+                                        )
                                       ],
                                     ),
                                   ),
@@ -320,7 +419,14 @@ class _ColorChangerState extends State<ColorChanger> {
                         clearColors();
                       }
                     },
-                    child: const Text("Submit")))
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.deepPurple,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            side: BorderSide(
+                                color: Colors.deepPurple, strokeAlign: 1.0))),
+                    child: Text("Submit",
+                        style: Theme.of(context).textTheme.bodySmall)))
           ],
         ),
       ],
@@ -334,6 +440,20 @@ class _ColorChangerState extends State<ColorChanger> {
 class Explanation extends StatelessWidget {
   const Explanation({super.key});
 
+  static const TextStyle baseStyle = TextStyle(fontSize: 20);
+  static const TextStyle punctuationStyle =
+      TextStyle(fontSize: 20, color: Colors.blueAccent);
+  static final TextStyle classStyle =
+      TextStyle(fontSize: 20, color: Colors.blue.shade900);
+  static const TextStyle keywordStyle =
+      TextStyle(fontSize: 20, color: Colors.deepOrange);
+  static final TextStyle numberStyle =
+      TextStyle(fontSize: 20, color: Colors.deepOrangeAccent.shade700);
+  static final TextStyle commentStyle =
+      TextStyle(fontSize: 20, color: Colors.lightBlueAccent.shade700);
+  static const TextStyle stringStyle =
+      TextStyle(fontSize: 20, color: Colors.green);
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -345,7 +465,9 @@ class Explanation extends StatelessWidget {
                 flex: 1,
                 child: Container(
                   margin: const EdgeInsets.all(5),
-                  child: const Text(textAlign: TextAlign.center, '''
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    '''
 The first few things you need to understand about the effect are the widgets that compose its basic structure
 
 First: The SizeBox is a very simple container that is just there to provide constant dimensions that match the viewport. This is achieved by using media-queiries for the height and width of the box. 
@@ -354,7 +476,9 @@ Second: The MouseRegion captures the position of the mouse within it boundaries,
 
 Third: The DecoratedBoxTransition functions like a regular container with the exception that its decoration is given an decoration tween that can defines the beginning and end of an animation that involves the decoration properties (i.e. height, width, background color, etc.) The decoration tween also requires a controller to handle the animation and define the timeframe in which the animation will take place.
 
-Make note of the functions _updateLocation, _clearLocation, and _getTween, as well as the variables _x, _y, widget.scale, and widget.colors.'''),
+Make note of the functions _updateLocation, _clearLocation, and _getTween, as well as the variables _x, _y, widget.scale, and widget.colors.''',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
                 ),
               ),
               Flexible(
@@ -365,7 +489,7 @@ Make note of the functions _updateLocation, _clearLocation, and _getTween, as we
                     decoration: const BoxDecoration(
                         color: Colors.deepPurpleAccent,
                         borderRadius: BorderRadius.all(Radius.circular(5))),
-                    child: const DartCodeViewer(
+                    child: DartCodeViewer(
                       backgroundColor: Colors.deepPurpleAccent,
                       '''
 SizedBox(
@@ -382,7 +506,11 @@ SizedBox(
   ),
 )''',
                       showCopyButton: false,
-                      height: 226,
+                      height: 325,
+                      baseStyle: baseStyle,
+                      punctuationStyle: punctuationStyle,
+                      classStyle: classStyle,
+                      keywordStyle: keywordStyle,
                     ),
                   ),
                 ),
@@ -401,9 +529,13 @@ SizedBox(
                   flex: 1,
                   child: Container(
                       margin: const EdgeInsets.all(5),
-                      child: const Text(textAlign: TextAlign.center, '''
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        '''
 The gradient is a stateful widget, meaning that it can have mutable state that can cause the widget to re-render. The animation controller is immutable and needs to be defined before the effect can begin.
-You can see that it is given a duration of 4 seconds and when it completed, and that it is to reverse and start over.''')),
+You can see that it is given a duration of 4 seconds and when it completed, and that it is to reverse and start over.''',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )),
                 ),
                 Flexible(
                   flex: 1,
@@ -413,7 +545,7 @@ You can see that it is given a duration of 4 seconds and when it completed, and 
                       decoration: const BoxDecoration(
                           color: Colors.deepPurpleAccent,
                           borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: const DartCodeViewer(
+                      child: DartCodeViewer(
                         backgroundColor: Colors.deepPurpleAccent,
                         '''
 void initState() {
@@ -423,7 +555,12 @@ void initState() {
         ..repeat(reverse: true);
 }''',
                         showCopyButton: false,
-                        height: 113,
+                        height: 161,
+                        baseStyle: baseStyle,
+                        punctuationStyle: punctuationStyle,
+                        classStyle: classStyle,
+                        keywordStyle: keywordStyle,
+                        numberStyle: numberStyle,
                       ),
                     ),
                   ),
@@ -445,9 +582,13 @@ void initState() {
                   flex: 1,
                   child: Container(
                       margin: const EdgeInsets.all(5),
-                      child: const Text(textAlign: TextAlign.center, '''
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        '''
 The variables that hold on to the mouse's position are part of the gradient's state, and as such they require proper setters so that the widget can rebuild properly.
-The _updateLocation and _clearLocation functions that you saw before simply update these variables; either to the mouse's current position within the MouseRegion, or to -0 when the mouse exits the MouseRegion, respectively.''')),
+The _updateLocation and _clearLocation functions that you saw before simply update these variables; either to the mouse's current position within the MouseRegion, or to -0 when the mouse exits the MouseRegion, respectively.''',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )),
                 ),
                 Flexible(
                   flex: 1,
@@ -457,7 +598,7 @@ The _updateLocation and _clearLocation functions that you saw before simply upda
                       decoration: const BoxDecoration(
                           color: Colors.deepPurpleAccent,
                           borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: const DartCodeViewer(
+                      child: DartCodeViewer(
                         backgroundColor: Colors.deepPurpleAccent,
                         '''
 double _x = 0.0;
@@ -476,7 +617,12 @@ void _clearLocation(PointerEvent details) {
   });
 }''',
                         showCopyButton: false,
-                        height: 242,
+                        height: 346,
+                        baseStyle: baseStyle,
+                        punctuationStyle: punctuationStyle,
+                        classStyle: classStyle,
+                        keywordStyle: keywordStyle,
+                        numberStyle: numberStyle,
                       ),
                     ),
                   ),
@@ -498,9 +644,13 @@ void _clearLocation(PointerEvent details) {
                   flex: 1,
                   child: Container(
                       margin: const EdgeInsets.all(5),
-                      child: const Text(textAlign: TextAlign.center, '''
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        '''
 The widget.scale and widget.colors variables are part of the gradient's parent's state. This is done so that the setters can be passed to other widgets so that the scale and colors can be changed externally.
-The scale variable is used in the _getTween function to determine the spread of the gradient, and the colors are just the colors of the gradient.''')),
+The scale variable is used in the _getTween function to determine the spread of the gradient, and the colors are just the colors of the gradient.''',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )),
                 ),
                 Flexible(
                   flex: 1,
@@ -510,7 +660,7 @@ The scale variable is used in the _getTween function to determine the spread of 
                       decoration: const BoxDecoration(
                           color: Colors.deepPurpleAccent,
                           borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: const DartCodeViewer(
+                      child: DartCodeViewer(
                         backgroundColor: Colors.deepPurpleAccent,
                         '''
 List<Color> _colors = const [
@@ -531,7 +681,12 @@ void _setColors(List<Color> colors) {
   });
 }''',
                         showCopyButton: false,
-                        height: 275,
+                        height: 391,
+                        baseStyle: baseStyle,
+                        punctuationStyle: punctuationStyle,
+                        classStyle: classStyle,
+                        keywordStyle: keywordStyle,
+                        numberStyle: numberStyle,
                       ),
                     ),
                   ),
@@ -553,9 +708,13 @@ void _setColors(List<Color> colors) {
                   flex: 1,
                   child: Container(
                       margin: const EdgeInsets.all(5),
-                      child: const Text(textAlign: TextAlign.center, '''
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        '''
 Now that you have have seen all values required for the effect as well as their setters, I was hoping to explain how _getTween works. It is the function that is run every frame and is the one that actually displays the effect. The function isn't particularly difficult, but there is a lot of mathematical muddiness due to the way that the linear gradient API is implemented. So it breaks down to being less of a coding skill problem, and turns more into a flutter inner-workings issue.
-All of that being said, there will have to be some breakdown of the API to really understand how the gradient is implemented and why figuring out how to implement the animation was such a challenge.''')),
+All of that being said, there will have to be some breakdown of the API to really understand how the gradient is implemented and why figuring out how to implement the animation was such a challenge.''',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )),
                 ),
               ]),
             ),
@@ -574,7 +733,9 @@ All of that being said, there will have to be some breakdown of the API to reall
                   flex: 1,
                   child: Container(
                       margin: const EdgeInsets.all(5),
-                      child: const Text(textAlign: TextAlign.center, '''
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        '''
 There are a few things in particular here that you need to notice.
 
 First: Notice that the list of colors as defined earlier are being passed into the function. The only place they are used is in the return value where you can see the DecorationTween that is being returned. The DecorationTween is simply a class that is used to to interpolate between two BoxDecorations. In layman's terms that means: It's the object that defines the two gradients that are going to transition into each other. If you remember from before that the _animationController was set with a duration of 4 seconds, with the configuration to repeat and reverse itself. The controller is given this tween to use to animate the background.
@@ -587,7 +748,9 @@ Alignment(0.0, -0.5) represents a point that is horizontally centered with respe
 
 Alignment(x, y) in a rectangle with height h and width w describes the point (x * w/2 + w/2, y * h/2 + h/2) in the coordinate system of the rectangle."
 
-Remember that the mouse is determined by the values _x and _y being set to -0, and that they are set to -0 when the mouse is no longer being tracked by the MouseRegion. You can see that by default the starting color starts at the top right and goes to the bottom left, then the starting color goes from top left to bottom right.''')),
+Remember that the mouse is determined by the values _x and _y being set to -0, and that they are set to -0 when the mouse is no longer being tracked by the MouseRegion. You can see that by default the starting color starts at the top right and goes to the bottom left, then the starting color goes from top left to bottom right.''',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )),
                 ),
                 Flexible(
                   flex: 1,
@@ -597,7 +760,7 @@ Remember that the mouse is determined by the values _x and _y being set to -0, a
                       decoration: const BoxDecoration(
                           color: Colors.deepPurpleAccent,
                           borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: const DartCodeViewer(
+                      child: DartCodeViewer(
                         backgroundColor: Colors.deepPurpleAccent,
                         '''
 DecorationTween _getTween(BuildContext context, double mouseX, double mouseY,
@@ -633,7 +796,13 @@ DecorationTween _getTween(BuildContext context, double mouseX, double mouseY,
     ));
 }''',
                         showCopyButton: false,
-                        height: 525,
+                        height: 759,
+                        baseStyle: baseStyle,
+                        punctuationStyle: punctuationStyle,
+                        classStyle: classStyle,
+                        keywordStyle: keywordStyle,
+                        numberStyle: numberStyle,
+                        commentStyle: commentStyle,
                       ),
                     ),
                   ),
@@ -655,9 +824,13 @@ DecorationTween _getTween(BuildContext context, double mouseX, double mouseY,
                   flex: 1,
                   child: Container(
                       margin: const EdgeInsets.all(5),
-                      child: const Text(textAlign: TextAlign.center, '''
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        '''
 This diagram shows what values will be in play for the calculation. Refer to the image as needed as I continue to descript the mechanics of the effect.
-The final points A, B, C, and D, are the corners of a rectangle whose width is the width of the viewport divided by the scale variable and whose height is the height of the viewport divided by the height of the scale variable, with its center-point being the mouse's position. You can directly see the scale variable effects the gradient as you can use it to increase or decrease the size of the rectangle used to determine the alignments.''')),
+The final points A, B, C, and D, are the corners of a rectangle whose width is the width of the viewport divided by the scale variable and whose height is the height of the viewport divided by the height of the scale variable, with its center-point being the mouse's position. You can directly see the scale variable effects the gradient as you can use it to increase or decrease the size of the rectangle used to determine the alignments.''',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )),
                 ),
                 Flexible(
                     flex: 1,
@@ -719,13 +892,17 @@ The final points A, B, C, and D, are the corners of a rectangle whose width is t
                   flex: 1,
                   child: Container(
                       margin: const EdgeInsets.all(5),
-                      child: const Text(textAlign: TextAlign.center, '''
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        '''
 Notice here in the first part of the else statement of _getTween, which is executed if the mouse is being tracked by the MouseRegion, how the view's width and height are queried and then divided by scale variable to get the dimensions of the square around the mouse.
 However, since the corners are only half the length and width of rectangle away from the origin, a.k.a. the mouse, we add or subtract the mouse's position by half the appropriate dimention of the rectangle.
 Whether we add or subtract from the position of the mouse is determined by the direction of the corner relative to the mouse. It is important to note, however, that this is determined in terms of Alignment, not in terms of an actual coordinate plane.
 For example:
 Since A is in the top left, its coordinates are both subtracted from the mouse, since top left is (-1, -1), even though that up from the origin is an increase in the y-axis, not a decrease.
-The same goes for B, C, and D being top right, bottom right, and bottom left, respectively.''')),
+The same goes for B, C, and D being top right, bottom right, and bottom left, respectively.''',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )),
                 ),
                 Flexible(
                   flex: 1,
@@ -735,7 +912,7 @@ The same goes for B, C, and D being top right, bottom right, and bottom left, re
                       decoration: const BoxDecoration(
                           color: Colors.deepPurpleAccent,
                           borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: const DartCodeViewer(
+                      child: DartCodeViewer(
                         backgroundColor: Colors.deepPurpleAccent,
                         '''
 } else {
@@ -767,7 +944,14 @@ The same goes for B, C, and D being top right, bottom right, and bottom left, re
   // TODO Convert coordinates into aligments
 }''',
                         showCopyButton: false,
-                        height: 529,
+                        height: 759,
+                        baseStyle: baseStyle,
+                        punctuationStyle: punctuationStyle,
+                        classStyle: classStyle,
+                        keywordStyle: keywordStyle,
+                        numberStyle: numberStyle,
+                        commentStyle: commentStyle,
+                        stringStyle: stringStyle,
                       ),
                     ),
                   ),
@@ -789,7 +973,9 @@ The same goes for B, C, and D being top right, bottom right, and bottom left, re
                   flex: 1,
                   child: Container(
                       margin: const EdgeInsets.all(5),
-                      child: const Text(textAlign: TextAlign.center, '''
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        '''
 Consider the formula given to us by the documentation that tells us about how the API describes the alignment, where x and y are equal to Alignment(x, y), or Alignment(-1, -1) to equal top left.: 
 
 (x * w/2 + w/2, y * h/2 + h/2)
@@ -816,7 +1002,9 @@ Continue to solve for j and k.
 (2 * y - h) / h
 
 Here at the end you can see how the formula maps very directly to the code written when solving for alignment. If done for each corner in the order specified, the resulting code is exactly all the Alignments needed for the effect to operate.
-The tween is then returned with said alignments and is used to paint the gradient every frame.''')),
+The tween is then returned with said alignments and is used to paint the gradient every frame.''',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )),
                 ),
                 Flexible(
                   flex: 1,
@@ -826,7 +1014,7 @@ The tween is then returned with said alignments and is used to paint the gradien
                       decoration: const BoxDecoration(
                           color: Colors.deepPurpleAccent,
                           borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: const DartCodeViewer(
+                      child: DartCodeViewer(
                         backgroundColor: Colors.deepPurpleAccent,
                         '''
 beginBegin = Alignment(
@@ -845,7 +1033,14 @@ endEnd = Alignment(
     ((2 * rotationPoints['c']!['x']!) - viewWidth) / viewWidth,
     ((2 * rotationPoints['c']!['y']!) - viewHeight) / viewHeight);''',
                         showCopyButton: false,
-                        height: 372,
+                        height: 539,
+                        baseStyle: baseStyle,
+                        punctuationStyle: punctuationStyle,
+                        classStyle: classStyle,
+                        keywordStyle: keywordStyle,
+                        numberStyle: numberStyle,
+                        commentStyle: commentStyle,
+                        stringStyle: stringStyle,
                       ),
                     ),
                   ),
@@ -867,9 +1062,13 @@ endEnd = Alignment(
                   flex: 1,
                   child: Container(
                       margin: const EdgeInsets.all(5),
-                      child: const Text(textAlign: TextAlign.center, '''
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        '''
 The alignments are are then returned with the DecorationTween from _getTween and are used by the controller to update the effect every frame. Keep in mind that _getTween is run every time, the colors, the scale, or the mouse position, which is tracked by the MouseRegion, are changed.
-This allows the controller to always be aware of where the mouse is as long as the mouse is moving in front of the gradient. If the mouse is not tracked, the position is considered -0, and the gradient is centered. Otherwise, the gradient will always be following the mouse.''')),
+This allows the controller to always be aware of where the mouse is as long as the mouse is moving in front of the gradient. If the mouse is not tracked, the position is considered -0, and the gradient is centered. Otherwise, the gradient will always be following the mouse.''',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )),
                 ),
               ]),
             ),

@@ -36,23 +36,24 @@ class _MainMenuState extends State<MainMenu> {
     return Scaffold(
       body: Stack(
         children: [
-          GradientWid(colors: _colors, scale: _scale),
-          Container(
-            alignment: Alignment.topCenter,
-            margin: const EdgeInsets.all(10),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Logo(),
-                  Folder(
-                    setScale: _setScale,
-                    setColors: _setColors,
-                  )
-                ],
-              ),
-            ),
-          )
+          GradientWid(
+              colors: _colors,
+              scale: _scale,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Logo(),
+                      Folder(
+                        setScale: _setScale,
+                        setColors: _setColors,
+                      )
+                    ],
+                  ),
+                ),
+              )),
         ],
       ),
     );

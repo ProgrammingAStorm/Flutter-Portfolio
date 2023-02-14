@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 
 // TODO Look into alternatives to the implementation of the effect
 // TODO Mess with having multiple tweens
+// TODO Allow for scale effecting default animation
+// TODO Alow for duration tweeking
 class GradientWid extends StatefulWidget {
-  const GradientWid({super.key, required this.colors, this.scale = 1});
+  const GradientWid(
+      {super.key, required this.colors, this.scale = 1, required this.child});
 
   final List<Color> colors;
   final double scale;
+  final Widget child;
 
   @override
   State<GradientWid> createState() => _GradientWidState();
@@ -127,7 +131,7 @@ class _GradientWidState extends State<GradientWid>
         child: DecoratedBoxTransition(
           decoration: _getTween(context, _x, _y, widget.scale, widget.colors)
               .animate(_animationController),
-          child: Container(),
+          child: widget.child,
         ),
       ),
     );

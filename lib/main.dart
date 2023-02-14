@@ -22,9 +22,40 @@ class MyApp extends StatelessWidget {
       // TODO Set up theme
       // TODO Allow theme manipulation
       theme: ThemeData(
+          // buttonTheme: const ButtonThemeData(
+          //     buttonColor: Colors.deepPurple,
+          //     shape: RoundedRectangleBorder(
+          //         borderRadius: BorderRadius.only(
+          //             topLeft: Radius.circular(5),
+          //             topRight: Radius.circular(5)),
+          //         side:
+          //             BorderSide(color: Colors.deepPurple, strokeAlign: 1.0))),
           textTheme: TextTheme(
-              displayMedium:
-                  TextStyle(color: Colors.deepPurpleAccent.shade100))),
+        displayLarge: TextStyle(
+            color: Colors.deepPurpleAccent.shade100,
+            fontFamily: "ProzaLibre",
+            fontSize: 70),
+        displayMedium: TextStyle(
+            color: Colors.deepPurpleAccent.shade100,
+            fontFamily: "ProzaLibre",
+            fontSize: 55),
+        displaySmall: TextStyle(
+            color: Colors.deepPurpleAccent.shade100,
+            fontFamily: "ProzaLibre",
+            fontSize: 20),
+        bodyLarge: TextStyle(
+            color: Colors.deepPurpleAccent.shade100,
+            fontFamily: "ProzaLibre",
+            fontSize: 60),
+        bodyMedium: TextStyle(
+            color: Colors.deepPurpleAccent.shade100,
+            fontFamily: "ProzaLibre",
+            fontSize: 30),
+        bodySmall: TextStyle(
+            color: Colors.deepPurpleAccent.shade100,
+            fontFamily: "ProzaLibre",
+            fontSize: 20),
+      )),
       //home: const MainMenu(),
       builder: (context, child) => ResponsiveWrapper.builder(
         BouncingScrollWrapper.builder(context, child!),
