@@ -137,7 +137,12 @@ class _ScaleFormState extends State<ScaleForm> {
               if (value == null || value.isEmpty) {
                 return 'Please enter a number.';
               }
-              return null;
+
+              if (value is double) {
+                return null;
+              }
+
+              return 'Please enter a proper number.';
             },
             onSaved: (newValue) {
               _scale = double.parse(newValue!);
