@@ -6,11 +6,16 @@ import 'package:flutter/material.dart';
 // TODO Alow for duration tweeking
 class GradientWid extends StatefulWidget {
   const GradientWid(
-      {super.key, required this.colors, this.scale = 1, required this.child});
+      {super.key,
+      required this.colors,
+      required this.scale,
+      required this.child,
+      required this.tweenSelection});
 
   final List<Color> colors;
   final double scale;
   final Widget child;
+  final String tweenSelection;
 
   @override
   State<GradientWid> createState() => _GradientWidState();
@@ -51,14 +56,13 @@ class _GradientWidState extends State<GradientWid>
     });
   }
 
-  DecorationTween _getTween(BuildContext context, double mouseX, double mouseY,
-      double scale, List<Color> colors) {
+  DecorationTween _getTween(BuildContext context) {
     Alignment beginBegin;
     Alignment beginEnd;
     Alignment endBegin;
     Alignment endEnd;
 
-    if (mouseX == -0 || mouseY == -0) {
+    if (_x == -0 || _y == -0) {
       beginBegin = Alignment.topRight;
       beginEnd = Alignment.bottomLeft;
       endBegin = Alignment.topLeft;
@@ -67,25 +71,25 @@ class _GradientWidState extends State<GradientWid>
       final double viewWidth = MediaQuery.of(context).size.width;
       final double viewHeight = MediaQuery.of(context).size.height;
 
-      final double rotationSquareWidth = viewWidth / scale;
-      final double rotationSquareHeight = viewHeight / scale;
+      final double rotationSquareWidth = viewWidth / widget.scale;
+      final double rotationSquareHeight = viewHeight / widget.scale;
 
       final Map<String, Map<String, double>> rotationPoints = {
         "a": {
-          "x": mouseX - (rotationSquareWidth / 2),
-          "y": mouseY - (rotationSquareHeight / 2)
+          "x": _x - (rotationSquareWidth / 2),
+          "y": _y - (rotationSquareHeight / 2)
         },
         "b": {
-          "x": mouseX + (rotationSquareWidth / 2),
-          "y": mouseY - (rotationSquareHeight / 2)
+          "x": _x + (rotationSquareWidth / 2),
+          "y": _y - (rotationSquareHeight / 2)
         },
         "c": {
-          "x": mouseX + (rotationSquareWidth / 2),
-          "y": mouseY + (rotationSquareHeight / 2)
+          "x": _x + (rotationSquareWidth / 2),
+          "y": _y + (rotationSquareHeight / 2)
         },
         "d": {
-          "x": mouseX - (rotationSquareWidth / 2),
-          "y": mouseY + (rotationSquareHeight / 2)
+          "x": _x - (rotationSquareWidth / 2),
+          "y": _y + (rotationSquareHeight / 2)
         }
       };
 
@@ -129,8 +133,7 @@ class _GradientWidState extends State<GradientWid>
         onHover: _updateLocation,
         onExit: _clearLocation,
         child: DecoratedBoxTransition(
-          decoration: _getTween(context, _x, _y, widget.scale, widget.colors)
-              .animate(_animationController),
+          decoration: _getTween(context).animate(_animationController),
           child: widget.child,
         ),
       ),

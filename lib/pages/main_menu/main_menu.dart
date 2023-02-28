@@ -17,6 +17,7 @@ class _MainMenuState extends State<MainMenu> {
     Color(0xFFE91E63),
   ];
   double _scale = 1;
+  String _tween = "Mouse";
 
   // TODO Look into statemangement to make this whole process more streamlined
   void _setScale(double scale) {
@@ -28,6 +29,12 @@ class _MainMenuState extends State<MainMenu> {
   void _setColors(List<Color> colors) {
     setState(() {
       _colors = colors;
+    });
+  }
+
+  void _setTween(String selection) {
+    setState(() {
+      _tween = selection;
     });
   }
 
@@ -45,6 +52,7 @@ class _MainMenuState extends State<MainMenu> {
           GradientWid(
               colors: _colors,
               scale: _scale,
+              tweenSelection: _tween,
               child: Align(
                 alignment: Alignment.topCenter,
                 child: SingleChildScrollView(
