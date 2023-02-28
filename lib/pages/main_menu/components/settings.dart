@@ -123,7 +123,7 @@ class _ScaleFormState extends State<ScaleForm> {
       child: Column(
         children: [
           Text(
-            "This number affects the spread of gradient as it follows the mouse. The size of the screen is divided by this number, and the result is used to calculate the gradient. This number will only affect the mouse effect. The default is 0.33.",
+            "This number affects the spread of gradient as it follows the mouse. The size of the screen is divided by this number, and the result is used to calculate the gradient. This number will only affect the mouse effect. The default is 1.",
             style: Theme.of(context).textTheme.bodySmall,
           ),
           TextFormField(
