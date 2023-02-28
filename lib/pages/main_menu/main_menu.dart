@@ -32,9 +32,13 @@ class _MainMenuState extends State<MainMenu> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     Future.delayed(Duration.zero, () => showAlert(context));
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
