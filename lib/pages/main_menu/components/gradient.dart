@@ -23,7 +23,10 @@ class GradientWid extends StatefulWidget {
 
 class _GradientWidState extends State<GradientWid>
     with SingleTickerProviderStateMixin {
+  static late Map<String, Function> _tweens;
+
   late AnimationController _animationController;
+  late Function _tween;
 
   double _x = 0.0;
   double _y = 0.0;
@@ -34,6 +37,83 @@ class _GradientWidState extends State<GradientWid>
     _animationController =
         AnimationController(duration: const Duration(seconds: 4), vsync: this)
           ..repeat(reverse: true);
+
+    _tweens = {
+      "Mouse": (BuildContext context) {
+        Alignment beginBegin;
+        Alignment beginEnd;
+        Alignment endBegin;
+        Alignment endEnd;
+
+        if (_x == -0 || _y == -0) {
+          beginBegin = Alignment.topRight;
+          beginEnd = Alignment.bottomLeft;
+          endBegin = Alignment.topLeft;
+          endEnd = Alignment.bottomRight;
+        } else {
+          final double viewWidth = MediaQuery.of(context).size.width;
+          final double viewHeight = MediaQuery.of(context).size.height;
+
+          final double rotationSquareWidth = viewWidth / widget.scale;
+          final double rotationSquareHeight = viewHeight / widget.scale;
+
+          final Map<String, Map<String, double>> rotationPoints = {
+            "a": {
+              "x": _x - (rotationSquareWidth / 2),
+              "y": _y - (rotationSquareHeight / 2)
+            },
+            "b": {
+              "x": _x + (rotationSquareWidth / 2),
+              "y": _y - (rotationSquareHeight / 2)
+            },
+            "c": {
+              "x": _x + (rotationSquareWidth / 2),
+              "y": _y + (rotationSquareHeight / 2)
+            },
+            "d": {
+              "x": _x - (rotationSquareWidth / 2),
+              "y": _y + (rotationSquareHeight / 2)
+            }
+          };
+
+          beginBegin = Alignment(
+              ((2 * rotationPoints["b"]!["x"]!) - viewWidth) / viewWidth,
+              ((2 * rotationPoints["b"]!["y"]!) - viewHeight) / viewHeight);
+          beginEnd = Alignment(
+              ((2 * rotationPoints["d"]!["x"]!) - viewWidth) / viewWidth,
+              ((2 * rotationPoints["d"]!["y"]!) - viewHeight) / viewHeight);
+          endBegin = Alignment(
+              ((2 * rotationPoints["a"]!["x"]!) - viewWidth) / viewWidth,
+              ((2 * rotationPoints["a"]!["y"]!) - viewHeight) / viewHeight);
+          endEnd = Alignment(
+              ((2 * rotationPoints["c"]!["x"]!) - viewWidth) / viewWidth,
+              ((2 * rotationPoints["c"]!["y"]!) - viewHeight) / viewHeight);
+        }
+
+        return DecorationTween(
+            begin: BoxDecoration(
+              gradient: LinearGradient(
+                begin: beginBegin,
+                end: beginEnd,
+                colors: widget.colors,
+              ),
+            ),
+            end: BoxDecoration(
+              gradient: LinearGradient(
+                begin: endBegin,
+                end: endEnd,
+                colors: widget.colors,
+              ),
+            ));
+      },
+      "Daily": (BuildContext context) {
+        return DecorationTween(
+            begin: const BoxDecoration(color: Colors.red),
+            end: const BoxDecoration(color: Colors.blue));
+      }
+    };
+
+    _tween = _tweens[widget.tweenSelection] as Function;
   }
 
   @override
@@ -56,76 +136,10 @@ class _GradientWidState extends State<GradientWid>
     });
   }
 
-  DecorationTween _getTween(BuildContext context) {
-    Alignment beginBegin;
-    Alignment beginEnd;
-    Alignment endBegin;
-    Alignment endEnd;
-
-    if (_x == -0 || _y == -0) {
-      beginBegin = Alignment.topRight;
-      beginEnd = Alignment.bottomLeft;
-      endBegin = Alignment.topLeft;
-      endEnd = Alignment.bottomRight;
-    } else {
-      final double viewWidth = MediaQuery.of(context).size.width;
-      final double viewHeight = MediaQuery.of(context).size.height;
-
-      final double rotationSquareWidth = viewWidth / widget.scale;
-      final double rotationSquareHeight = viewHeight / widget.scale;
-
-      final Map<String, Map<String, double>> rotationPoints = {
-        "a": {
-          "x": _x - (rotationSquareWidth / 2),
-          "y": _y - (rotationSquareHeight / 2)
-        },
-        "b": {
-          "x": _x + (rotationSquareWidth / 2),
-          "y": _y - (rotationSquareHeight / 2)
-        },
-        "c": {
-          "x": _x + (rotationSquareWidth / 2),
-          "y": _y + (rotationSquareHeight / 2)
-        },
-        "d": {
-          "x": _x - (rotationSquareWidth / 2),
-          "y": _y + (rotationSquareHeight / 2)
-        }
-      };
-
-      beginBegin = Alignment(
-          ((2 * rotationPoints["b"]!["x"]!) - viewWidth) / viewWidth,
-          ((2 * rotationPoints["b"]!["y"]!) - viewHeight) / viewHeight);
-      beginEnd = Alignment(
-          ((2 * rotationPoints["d"]!["x"]!) - viewWidth) / viewWidth,
-          ((2 * rotationPoints["d"]!["y"]!) - viewHeight) / viewHeight);
-      endBegin = Alignment(
-          ((2 * rotationPoints["a"]!["x"]!) - viewWidth) / viewWidth,
-          ((2 * rotationPoints["a"]!["y"]!) - viewHeight) / viewHeight);
-      endEnd = Alignment(
-          ((2 * rotationPoints["c"]!["x"]!) - viewWidth) / viewWidth,
-          ((2 * rotationPoints["c"]!["y"]!) - viewHeight) / viewHeight);
-    }
-
-    return DecorationTween(
-        begin: BoxDecoration(
-          gradient: LinearGradient(
-            begin: beginBegin,
-            end: beginEnd,
-            colors: widget.colors,
-          ),
-        ),
-        end: BoxDecoration(
-          gradient: LinearGradient(
-            begin: endBegin,
-            end: endEnd,
-            colors: widget.colors,
-          ),
-        ));
-  }
-
   @override
   Widget build(BuildContext context) {
+    _tween = _tweens[widget.tweenSelection] as Function;
+
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
@@ -133,7 +147,7 @@ class _GradientWidState extends State<GradientWid>
         onHover: _updateLocation,
         onExit: _clearLocation,
         child: DecoratedBoxTransition(
-          decoration: _getTween(context).animate(_animationController),
+          decoration: _tween(context).animate(_animationController),
           child: widget.child,
         ),
       ),

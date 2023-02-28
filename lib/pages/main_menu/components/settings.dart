@@ -6,17 +6,22 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 // TODO Allow speed of animation selection
 // TODO Allw different effect types
 class Settings extends StatefulWidget {
-  const Settings({super.key, required this.setScale, required this.setColors});
+  const Settings(
+      {super.key,
+      required this.setScale,
+      required this.setColors,
+      required this.setTween});
 
   final Function setScale;
   final Function setColors;
+  final Function setTween;
 
   @override
   State<Settings> createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
-  final List<bool> _isOpen = [false, false, false];
+  final List<bool> _isOpen = [false, false, false, false];
 
   // TODO Explaind gradient mouse effect with modal
   @override
@@ -32,6 +37,31 @@ class _SettingsState extends State<Settings> {
             backgroundColor: Colors.deepPurpleAccent,
             canTapOnHeader: true,
             isExpanded: _isOpen[0],
+            headerBuilder: (context, isOpen) {
+              return Container(
+                margin: const EdgeInsets.all(5),
+                child: const Center(
+                  child: Text(
+                    'Tween',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              );
+            },
+            body: Container(
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
+                border: Border.all(color: Colors.deepPurpleAccent, width: 3),
+              ),
+              child: TweenForm(
+                setTween: widget.setTween,
+              ),
+            )),
+        ExpansionPanel(
+            backgroundColor: Colors.deepPurpleAccent,
+            canTapOnHeader: true,
+            isExpanded: _isOpen[1],
             headerBuilder: (context, isOpen) {
               return Container(
                 margin: const EdgeInsets.all(5),
@@ -53,7 +83,7 @@ class _SettingsState extends State<Settings> {
         ExpansionPanel(
             backgroundColor: Colors.deepPurpleAccent,
             canTapOnHeader: true,
-            isExpanded: _isOpen[1],
+            isExpanded: _isOpen[2],
             headerBuilder: (context, isOpen) {
               return Container(
                 padding: const EdgeInsets.all(5),
@@ -75,7 +105,7 @@ class _SettingsState extends State<Settings> {
         ExpansionPanel(
             backgroundColor: Colors.deepPurpleAccent,
             canTapOnHeader: true,
-            isExpanded: _isOpen[2],
+            isExpanded: _isOpen[3],
             headerBuilder: (context, isOpen) {
               return Container(
                 padding: const EdgeInsets.all(5),
@@ -96,6 +126,43 @@ class _SettingsState extends State<Settings> {
                 child: const Explanation())),
       ],
     );
+  }
+}
+
+class TweenForm extends StatefulWidget {
+  const TweenForm({super.key, required this.setTween});
+
+  final Function setTween;
+
+  @override
+  State<TweenForm> createState() => _TweenFormState();
+}
+
+class _TweenFormState extends State<TweenForm> {
+  static const List<String> entries = <String>["Mouse", "Daily"];
+
+  String dropdownValue = entries.first;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton(
+        value: dropdownValue,
+        dropdownColor: Colors.deepPurpleAccent,
+        items: entries.map<DropdownMenuItem<String>>((entry) {
+          return DropdownMenuItem<String>(
+              value: entry,
+              child: Text(
+                entry,
+                style: Theme.of(context).textTheme.displaySmall,
+              ));
+        }).toList(),
+        onChanged: (String? value) {
+          setState(() {
+            dropdownValue = value!;
+          });
+
+          widget.setTween(value);
+        });
   }
 }
 

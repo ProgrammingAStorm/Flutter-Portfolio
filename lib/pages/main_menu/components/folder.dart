@@ -5,10 +5,15 @@ import './settings.dart';
 import './welcome.dart';
 
 class Folder extends StatefulWidget {
-  const Folder({super.key, required this.setScale, required this.setColors});
+  const Folder(
+      {super.key,
+      required this.setScale,
+      required this.setColors,
+      required this.setTween});
 
   final Function setScale;
   final Function setColors;
+  final Function setTween;
 
   Widget? getStaticPages(String page, BuildContext context) {
     Map<String, Widget> pages = {
@@ -17,9 +22,7 @@ class Folder extends StatefulWidget {
       "Interactive Resume": const Construction(),
       "Projects": const Construction(),
       "Settings": Settings(
-        setScale: setScale,
-        setColors: setColors,
-      ),
+          setScale: setScale, setColors: setColors, setTween: setTween),
       "Credits": const Construction(),
     };
 

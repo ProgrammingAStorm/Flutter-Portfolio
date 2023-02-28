@@ -61,9 +61,9 @@ class _MainMenuState extends State<MainMenu> {
                     children: [
                       const Logo(),
                       Folder(
-                        setScale: _setScale,
-                        setColors: _setColors,
-                      )
+                          setScale: _setScale,
+                          setColors: _setColors,
+                          setTween: _setTween)
                     ],
                   ),
                 ),
