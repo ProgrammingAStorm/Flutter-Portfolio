@@ -5,6 +5,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 // TODO Allow speed of animation selection
 // TODO Allw different effect types
+// TODO Add explaination for daily tween
 class Settings extends StatefulWidget {
   const Settings(
       {super.key,
