@@ -34,6 +34,7 @@ class _GradientWidState extends State<GradientWid>
   double _y = 0.0;
 
   late double _percentOfDayElapsed;
+  late Timer timer;
 
   @override
   void initState() {
@@ -182,7 +183,7 @@ class _GradientWidState extends State<GradientWid>
 
     _tween = _tweens[widget.tweenSelection] as Function;
 
-    Timer.periodic(const Duration(milliseconds: 100), (timer) {
+    timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
       final now = DateTime.now();
 
       setState(() {
@@ -194,8 +195,11 @@ class _GradientWidState extends State<GradientWid>
 
   @override
   void dispose() {
-    _animationController.dispose();
     super.dispose();
+
+    _animationController.dispose();
+
+    timer.cancel();
   }
 
   void _updateLocation(PointerEvent details) {
