@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/pages/main_menu/components/construction.dart';
+import 'package:portfolio/pages/main_menu/components/projects.dart';
 import 'package:portfolio/pages/main_menu/components/web_dev_book.dart';
 import './settings.dart';
 import './welcome.dart';
@@ -18,9 +19,7 @@ class Folder extends StatefulWidget {
   Widget? getStaticPages(String page, BuildContext context) {
     Map<String, Widget> pages = {
       "Welcome": const Welcome(),
-      "Web Dev's Handbook": const Construction(),
-      "Interactive Resume": const Construction(),
-      "Projects": const Construction(),
+      "Projects": const Projects(),
       "Settings": Settings(
           setScale: setScale, setColors: setColors, setTween: setTween),
       "Credits": const Construction(),
@@ -31,8 +30,6 @@ class Folder extends StatefulWidget {
 
   static List<Map<String, dynamic>> staticTabs = [
     {"title": "Welcome"},
-    {"title": "Web Dev's Handbook"},
-    {"title": "Interactive Resume"},
     {"title": "Projects"},
     {"title": "Settings"},
     {"title": "Credits"},
