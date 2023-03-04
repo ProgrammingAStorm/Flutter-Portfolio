@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/pages/main_menu/components/about_me.dart';
 import 'package:portfolio/pages/main_menu/components/construction.dart';
 import 'package:portfolio/pages/main_menu/components/projects.dart';
 import 'package:portfolio/pages/main_menu/components/web_dev_book.dart';
@@ -16,9 +17,11 @@ class Folder extends StatefulWidget {
   final Function setColors;
   final Function setTween;
 
+  // TODO Do this with the something something key value pair instead of having separate things ig or whatever
   Widget? getStaticPages(String page, BuildContext context) {
     Map<String, Widget> pages = {
       "Welcome": const Welcome(),
+      "About Me": const AboutMe(),
       "Projects": const Projects(),
       "Settings": Settings(
           setScale: setScale, setColors: setColors, setTween: setTween),
@@ -28,8 +31,9 @@ class Folder extends StatefulWidget {
     return pages[page];
   }
 
-  static List<Map<String, dynamic>> staticTabs = [
+  static List<Map<String, String>> staticTabs = [
     {"title": "Welcome"},
+    {"title": "About Me"},
     {"title": "Projects"},
     {"title": "Settings"},
     {"title": "Credits"},
@@ -48,7 +52,7 @@ class Folder extends StatefulWidget {
       }
 
       newTabs.add(FolderButton(
-          title: staticTabs[x]["title"],
+          title: staticTabs[x]["title"] as String,
           count: x,
           selected: selected,
           setTab: setTab));
@@ -93,7 +97,7 @@ class _FolderState extends State<Folder> {
             width: 1000,
             decoration: const BoxDecoration(color: Colors.deepPurple),
             child: widget.getStaticPages(
-                Folder.staticTabs[_selectedTab]['title'], context)),
+                Folder.staticTabs[_selectedTab]['title'] as String, context)),
       )
     ]);
   }
