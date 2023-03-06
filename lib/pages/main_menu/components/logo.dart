@@ -28,11 +28,23 @@ class Logo extends StatelessWidget {
             Stack(
               children: [
                 Text(
-                  "AStorm",
+                  "A",
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Text(
-                  "AStorm",
+                  "A",
+                  style: Theme.of(context).textTheme.titleMedium,
+                )
+              ],
+            ),
+            Stack(
+              children: [
+                Text(
+                  "Storm",
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Text(
+                  "Storm",
                   style: Theme.of(context).textTheme.titleMedium,
                 )
               ],
