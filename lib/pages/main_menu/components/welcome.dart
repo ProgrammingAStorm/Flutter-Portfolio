@@ -22,7 +22,7 @@ class Welcome extends StatelessWidget {
      
      The mouse effect was a small idea that turned out to be big, but the sunrise/sunset effect stole my heart. I managed to finish it in a fraction of the time compared to the mouse effect, since I learned a lot the first time around, but I still had to start from scratch half-way through.
      
-     Currently, I'm working on my resume, but I plan to add a lot to this site. No spoilers of course. ;)''',
+     Currently, I'm working on my resume, but I plan to add a lot to this site. No spoilers of course. ;) In the mean time please check out my 'About Me' section if you'd like to learn more about my background. ''',
               style: Theme.of(context).textTheme.bodySmall,
               textAlign: TextAlign.start,
             ),
