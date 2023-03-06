@@ -117,6 +117,23 @@ class _MainMenuState extends State<MainMenu> {
                       '''
 If you would like to make the page fullscreen, press F11.''',
                       style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    Text(
+                      "This website is also meant to experienced on larger screens.",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Text(
+                      '''
+If possible, please use a device larger than a smart phone.''',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    Text(
+                      "These are merely suggestions and are not required to experience the website.",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Text(
+                      '''Thank you for understanding.''',
+                      style: Theme.of(context).textTheme.bodySmall,
                     )
                   ]),
                 ),
