@@ -228,7 +228,10 @@ class _GradientWidState extends State<GradientWid>
         onExit: _clearLocation,
         child: DecoratedBoxTransition(
           decoration: _tween(context).animate(_animationController),
-          child: widget.child,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: widget.child,
+          ),
         ),
       ),
     );
