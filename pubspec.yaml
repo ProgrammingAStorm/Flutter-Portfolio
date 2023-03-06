@@ -39,6 +39,7 @@ dependencies:
   flutter_colorpicker: ^1.0.3
   dart_code_viewer2: ^1.0.0
   url_launcher: ^6.1.10
+  flutter_screenutil: ^5.6.1
 
 dev_dependencies:
   flutter_test:
