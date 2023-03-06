@@ -36,14 +36,14 @@ class MyApp extends StatelessWidget {
                 textTheme: TextTheme(
               titleLarge: TextStyle(
                   fontFamily: "BigMisterC",
-                  fontSize: 73.sp,
+                  fontSize: 66.sp,
                   foreground: Paint()
                     ..style = PaintingStyle.stroke
                     ..strokeWidth = 5
                     ..color = Colors.indigo),
               titleMedium: TextStyle(
                   fontFamily: "BigMisterC",
-                  fontSize: 73.sp,
+                  fontSize: 66.sp,
                   fontWeight: FontWeight.w300,
                   color: Colors.deepPurpleAccent,
                   shadows: const [
