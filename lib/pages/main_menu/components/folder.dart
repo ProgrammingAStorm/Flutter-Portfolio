@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/pages/main_menu/components/about_me.dart';
-import 'package:portfolio/pages/main_menu/components/construction.dart';
-import 'package:portfolio/pages/main_menu/components/projects.dart';
-import 'package:portfolio/pages/main_menu/components/web_dev_book.dart';
+import './about_me.dart';
+import './construction.dart';
+import './projects.dart';
+import './web_dev_book.dart';
 import './settings.dart';
 import './welcome.dart';
 

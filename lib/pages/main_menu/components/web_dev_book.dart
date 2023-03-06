@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/pages/contents/contents.dart';
+import '/pages/contents/contents.dart';
 
 class WebDevBook extends StatelessWidget {
   const WebDevBook({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:portfolio/pages/main_menu/main_menu.dart';
+import './pages/main_menu/main_menu.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 void main() async {
