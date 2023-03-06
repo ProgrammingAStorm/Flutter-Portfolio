@@ -1,56 +1,43 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class Logo extends StatelessWidget {
   const Logo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 10, bottom: 5, left: 5, right: 5),
-      //width: min(500, MediaQuery.of(context).size.width),
-      height: 135,
-      child: Stack(
-        children: [
-          Text(
-            "ProgrammingAStorm",
-            style: TextStyle(
-                fontFamily: "BigMisterC",
-                fontSize: 135,
-                foreground: Paint()
-                  ..style = PaintingStyle.stroke
-                  ..strokeWidth = 5
-                  ..color = Colors.indigo),
-            // textScaleFactor:
-            //     ScaleSize.textScaleFactor(context, maxTextScaleFactor: 1.6),
-          ),
-          const Text(
-            "ProgrammingAStorm",
-            style: TextStyle(
-                fontFamily: "BigMisterC",
-                fontSize: 135,
-                fontWeight: FontWeight.w300,
-                color: Colors.deepPurpleAccent,
-                shadows: [
-                  Shadow(
-                      color: Colors.pink,
-                      blurRadius: 2,
-                      offset: Offset(2.0, 2.0)),
-                ]),
-            // textScaleFactor:
-            //     ScaleSize.textScaleFactor(context, maxTextScaleFactor: 1.6),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class ScaleSize {
-  static double textScaleFactor(BuildContext context,
-      {double maxTextScaleFactor = 2}) {
-    final width = MediaQuery.of(context).size.width;
-    double val = (width / 1400) * maxTextScaleFactor;
-    return max(1, min(val, maxTextScaleFactor));
+        margin: const EdgeInsets.all(5),
+        //height: ScreenUtil().radius(200),
+        child: Wrap(
+          children: [
+            Stack(
+              children: [
+                Text(
+                  "Programming",
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Text(
+                  "Programming",
+                  style: Theme.of(context).textTheme.titleMedium,
+                )
+              ],
+            ),
+            Stack(
+              children: [
+                Text(
+                  "AStorm",
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Text(
+                  "AStorm",
+                  style: Theme.of(context).textTheme.titleMedium,
+                )
+              ],
+            ),
+          ],
+        ));
   }
 }
