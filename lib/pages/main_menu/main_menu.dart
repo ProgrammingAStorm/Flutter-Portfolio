@@ -111,28 +111,32 @@ class _MainMenuState extends State<MainMenu> {
                   child: Column(children: [
                     Text(
                       "This website is best experienced in fullscreen.",
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     Text(
-                      '''
-If you would like to make the page fullscreen, press F11.''',
+                      "If you would like to make the page fullscreen, press F11.",
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     Text(
                       "This website is also meant to experienced on larger screens.",
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     Text(
-                      '''
-If possible, please use a device larger than a smart phone.''',
+                      "If possible, please use a device larger than a smart phone.",
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     Text(
                       "These are merely suggestions and are not required to experience the website.",
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     Text(
-                      '''Thank you for understanding.''',
+                      "Thank you for understanding.",
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodySmall,
                     )
                   ]),
