@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:programmingastorm_portfolio/pages/main_menu/components/credits.dart';
 import './about_me.dart';
-import './construction.dart';
+//import './construction.dart';
 import './projects.dart';
-import './web_dev_book.dart';
+//import './web_dev_book.dart';
 import './settings.dart';
 import './welcome.dart';
 
@@ -25,7 +26,7 @@ class Folder extends StatefulWidget {
       "Projects": const Projects(),
       "Settings": Settings(
           setScale: setScale, setColors: setColors, setTween: setTween),
-      "Credits": const Construction(),
+      "Credits": const Credits(),
     };
 
     return pages[page];
