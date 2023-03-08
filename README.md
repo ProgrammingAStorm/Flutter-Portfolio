@@ -1,16 +1,9 @@
-# portfolio
+# Flutter Portfolio
+This is my professional portfolio; it's a place where I not only show off my projects, but my prowess as a front-end designer. I have worked hard to build a website that is not only tasteful, but enjoyable. When I could build a website that is impressive only to the technically knowledgable, I wanted to also build a website that is fun for the layman.
 
-A new Flutter project.
+I also wanted to try out Flutter as I am considering it for future plans. It was also a good excuse to try my had and object-oriented design frameworks since those skills are in high demand. Needless to say, Flutter is very well designed and the way it implements object-oriented typing with the tooling to guide you is unparalled. The developer's experience is clearly put first and formost, and it is obvious to me that Flutter is a labor of love.
 
-## Getting Started
+That being said, please enjoy the website that labored for with love.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Deployment
+https://programmingastorm.xyz/#/
