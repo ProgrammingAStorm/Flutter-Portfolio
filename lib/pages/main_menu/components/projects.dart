@@ -101,8 +101,8 @@ class Projects extends StatefulWidget {
         "MVC",
         "Content-Driven",
       ],
-      "deployment": ["https://github.com/VN135766/Instaclone-"],
-      "repo": ["https://github.com/VN135766/Instaclone-"],
+      "deployment": ["https://instaclonev2.herokuapp.com/"],
+      "repo": ["https://github.com/ProgrammingAStorm/Instaclone"],
       "takeAways": [
         "The MERN stack is a very effective way of making full-stack web apps.",
         "A week and a half is not a lot of time to make a perfect looking web app with a small team.",
