@@ -26,9 +26,7 @@ class Projects extends StatefulWidget {
         "Responsive Design",
         "Object-Oriented"
       ],
-      "deployment": [
-        "https://programmingastorm.github.io/Flutter-Portfolio/#/"
-      ],
+      "deployment": ["https://programmingastorm.xyz/#/"],
       "repo": ["https://github.com/ProgrammingAStorm/Flutter-Portfolio"],
       "takeAways": [
         "Flutter has a great developer experience.",
